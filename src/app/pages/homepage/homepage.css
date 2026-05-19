@@ -1,0 +1,147 @@
+.hero {
+    border-bottom: 1px solid #061B0E;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    margin: 0;
+}
+
+.hero-container {
+    display: flex;
+    gap: var(--space-2xl);
+}
+
+.hero h1 {
+    line-height: 60px;
+}
+
+.hero-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-right {
+    flex: 0 1 40%;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-cta {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: flex-start;
+}
+
+.cta-booktable {
+    padding: var(--space-md) var(--space-lg);
+}
+
+.cta-menu {
+    padding: var(--space-sm) var(--space-xl);
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 1px solid var(--text-dark);
+}
+
+.cta-menu:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-white);
+}
+
+.hero-image {
+    max-height: 600px;
+    object-fit: cover;
+}
+
+.vibe {
+    padding: 64px 0;
+    background-color: #F5F3EE;
+    border-bottom: 1px solid #061B0E;
+}
+
+.vibe-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: min-content 1fr;
+    column-gap: 40px;
+    row-gap: 20px; 
+}
+
+.vibe-title {
+    grid-column: span 2 / span 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vibe-city {
+    font-size: 0.75rem;
+}
+
+.vibe-left {
+    grid-row-start: 2;
+}
+
+.vibe-right {
+    grid-row-start: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.imgh500 {
+    max-height: 500px;
+}
+
+.imgh350 {
+    max-height: 350px;
+}
+
+.imgh250 {
+    max-height: 250px;
+}
+
+.concept {
+    border-bottom: 1px solid #061B0E;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    margin: 0;
+}
+
+.concept-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.concept-parent {
+    display: flex;
+    gap: 40px;
+}
+
+@media(max-width: 700px) {
+    .hero-container {
+        flex-direction: column;
+    }
+
+    .imageframe {
+        max-height: 450px;
+    }
+
+    .vibe-container {
+        display: flex;
+        flex-direction: column;
+        grid-template-rows: min-content min-content min-content;
+    }
+
+    .vibe-title {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .concept-parent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+}

@@ -1,7 +1,8 @@
 :root {
     /* Colors */
-    --primary-color: #1B3022;
+    --primary-color: #23492F;
     --secondary-color: #2D1E17;
+    --tertiary-color: #061B0E;
 
     --text-dark: #1B1C19;
     --text-main: #434843;
@@ -55,15 +56,27 @@ body {
 
 /* TYPOGRAPHY */
 h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif); 
     color: var(--text-dark);
-    font-weight: 700;
+    font-weight: 400;
     line-height: var(--line-height-heading);
     margin-bottom: var(--space-md);
 }
 
-h1 { font-size: 2.25rem; }
-h2 { font-size: 1.75rem; margin-top: var(--space-xl); }
-h3 { font-size: 1.35rem; margin-top: var(--space-lg); }
+h1 { 
+    font-size: 4rem; 
+    letter-spacing: -1.28;
+}
+
+h2 { 
+    font-size: 2.5rem;
+    line-height: 1.2;
+}
+
+h3 { 
+    font-size: 1.75rem;
+    font-style: italic; 
+}
 
 p, ul, ol, blockquote {
     margin-bottom: var(--space-md);
@@ -76,7 +89,8 @@ ul, ol {
 /* LINKS AND BUTTONS */
 
 a {
-    color: var(--primary-color);
+    color: var(--text-main);
+    font-style: italic;
     text-decoration: underline;
     text-underline-offset: 3px;
     transition: color var(--transition-fast);
@@ -92,7 +106,7 @@ a:hover, a:focus {
     align-items: center;
     justify-content: center;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     padding: var(--space-sm) var(--space-lg);
@@ -104,7 +118,7 @@ a:hover, a:focus {
 }
 
 .btn:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--secondary-color);
     color: #ffffff;
 }
 
@@ -164,6 +178,55 @@ video {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+.imageframe {
+    width: 100%;
+    height: auto;
+    padding: 6px;
+    border: 1px solid #061B0E;
+    object-fit: cover;
+}
+
+.imageborder {
+    width: 100%;
+    height: auto;
+    border: 1px solid #061B0E;
+    object-fit: cover;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+figcaption {
+    display: block;
+    width: 100%;
+    padding-top: var(--space-xs);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+figcaption.border-caption {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: var(--space-md);
+    border-top: 1px solid #061B0E;
+
+    & .figtitle {
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
+
+    & span {
+        max-width: 200px;
+    }
 }
 
 /* 7. LAYOUT-CONTAINER */
