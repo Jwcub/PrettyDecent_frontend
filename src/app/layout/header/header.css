@@ -60,6 +60,14 @@ header {
   transform-origin: bottom left;
 }
 
+.main-nav a.active {
+  color: var(--primary-color);
+}
+
+.main-nav a.active::after {
+  transform: scaleX(1);
+}
+
 .header-actions {
   justify-self: end; 
 }
