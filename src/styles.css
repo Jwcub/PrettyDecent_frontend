@@ -1,1 +1,178 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    /* Colors */
+    --primary-color: #1B3022;
+    --secondary-color: #2D1E17;
+
+    --text-dark: #1B1C19;
+    --text-main: #434843;
+    --text-white: #ffffff;
+    --bg-main: #FBFAF4;
+
+    /* Typography */
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Libre Caslon Text', serif;
+    --line-height-base: 1.6;
+    --line-height-heading: 1.25;
+
+    /* Spacing  */
+    --space-xs: 0.25rem;  /* 4px */
+    --space-sm: 0.5rem;   /* 8px */
+    --space-md: 1rem;     /* 16px */
+    --space-lg: 1.5rem;   /* 24px */
+    --space-xl: 2rem;     /* 32px */
+    --space-2xl: 3rem;    /* 48px */
+
+    /* Transitions */
+    --transition-fast: 0.25s ease;
+}
+
+/* RESET / GLOBAL STYLING */
+ 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: var(--line-height-base);
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-dark);
+    font-weight: 700;
+    line-height: var(--line-height-heading);
+    margin-bottom: var(--space-md);
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; margin-top: var(--space-xl); }
+h3 { font-size: 1.35rem; margin-top: var(--space-lg); }
+
+p, ul, ol, blockquote {
+    margin-bottom: var(--space-md);
+}
+
+ul, ol {
+    padding-left: var(--space-xl);
+}
+
+/* LINKS AND BUTTONS */
+
+a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+}
+
+a:hover, a:focus {
+    color: var(--primary-hover);
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid transparent;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+    color: #ffffff;
+}
+
+.btn:active {
+      transform: scale(0.98);
+}
+
+/* FORMS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-main);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    appearance: none;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+label {
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    color: var(--text-main);
+}
+
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+/* IMAGES AND MEDIA */
+img, 
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 7. LAYOUT-CONTAINER */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+}
+
