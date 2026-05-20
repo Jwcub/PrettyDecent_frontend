@@ -115,7 +115,8 @@
 }
 
 .concept-parent {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2xl);
 }
 
@@ -140,8 +141,7 @@
     }
 
     .concept-parent {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 }
