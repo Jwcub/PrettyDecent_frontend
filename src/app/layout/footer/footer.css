@@ -1,3 +1,7 @@
+footer {
+    border-top: 1px solid #061B0E;
+}
+
 footer h3 {
     font-family: var(--font-sans);
     font-style: normal;
@@ -9,8 +13,8 @@ footer h3 {
 .footer-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 60px;
-    margin-bottom: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     gap: var(--space-xl);
 
     & > div {

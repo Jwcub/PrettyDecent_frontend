@@ -91,8 +91,11 @@ header {
 
 @media (max-width: 767px) {
   .header-container {
+    position: fixed;
+    background-color: var(--bg-main);
     grid-template-columns: 1fr 1fr;
     height: 70px;
+    border-bottom: 1px solid #061B0E;
   }
 
   .header-actions {
