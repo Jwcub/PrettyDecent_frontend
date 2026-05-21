@@ -2,9 +2,12 @@
     <h1>Login</h1>
     <p>This is an internal workspace for the hands that shape the night. Here, menus are locked into place and tables are arranged before the first guest arrives.</p>
 
-     <form class="login">
-        <label>Username
-                <input type="text">
+    <form class="login" (ngSubmit)="login()">
+            <div>
+                {{ message() }}
+            </div>
+        <label>Email
+                <input type="email">
         </label>
 
         <label>Password

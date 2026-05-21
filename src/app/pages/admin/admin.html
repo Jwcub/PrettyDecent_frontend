@@ -17,6 +17,25 @@
     <section>
         <p>Check messages</p>
     </section>
+
+    <section>
+        <h2>Add new account</h2>
+        <form (ngSubmit)="register()">
+            <div>
+                {{ message() }}
+            </div>
+            <label>Email::
+                <input type="email" id="email" name="email" [(ngModel)]="email">
+            </label>
+
+            <label>Password:
+                <input type="password" id="password" name="password" [(ngModel)]="password">
+            </label>
+
+            <button>Register account</button>
+
+        </form>
+    </section>
     
     
 </div>

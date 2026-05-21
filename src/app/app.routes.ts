@@ -7,6 +7,7 @@ import { Booking } from './pages/booking/booking';
 import { Login } from './pages/login/login';
 import { Admin } from './pages/admin/admin';
 import { NotFound } from './pages/not-found/not-found';
+import { authGuardGuard } from './guards/auth-guard-guard';
 
 export const routes: Routes = [
     { path: "", component: Homepage},
@@ -15,7 +16,7 @@ export const routes: Routes = [
     { path: "contact", component: Contact },
     { path: "booking", component: Booking },
     { path: "login", component: Login },
-    { path: "admin", component: Admin },
+    { path: "admin", component: Admin, canActivate: [authGuardGuard] },
     { path: "404", component: NotFound },
     { path: "**", redirectTo: "404", pathMatch: "full" }
 ];
