@@ -1,0 +1,20 @@
+.contact-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    column-gap: 60px;
+}
+
+.contactform {
+    background-color: #F5F3EE;
+    padding: var(--space-xl);
+}
+
+.contactform label {
+    font-size: 12px;
+    text-transform: capitalize;
+}

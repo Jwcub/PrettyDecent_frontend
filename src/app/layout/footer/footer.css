@@ -23,7 +23,8 @@ footer a:hover {
     grid-template-columns: repeat(4, 1fr);
     padding-top: 60px;
     padding-bottom: 60px;
-    gap: var(--space-xl);
+    column-gap: var(--space-xl);
+    row-gap: var(--space-2xl);
 
     & > div {
         display: flex;
@@ -32,9 +33,15 @@ footer a:hover {
     }
 }
 
+@media(max-width: 950px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
 @media(max-width: 700px) {
     .footer-container {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, auto);
     }
 }

@@ -1,4 +1,55 @@
 .booking-container {
     padding-top: 60px;
     padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 700px;
+}
+
+.booking {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    border: 1px solid var(--tertiary-color);
+    background-color: var(--white);
+    margin-top: var(--space-md);
+}
+
+.booking-twocol {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.booking h2 {
+    font-size: 2rem;
+}
+
+.booking label {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.half {
+    flex-basis: 50%;
+}
+
+.confirm-booking {
+    padding: var(--space-md);
+}
+
+.booking-info {
+    font-size: var(--smal-text);
+    text-transform: uppercase;
+    margin-top: var(--space-md);
+}
+
+@media(max-width: 700px) {
+    .booking-twocol {
+        flex-direction: column;
+    }
 }

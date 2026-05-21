@@ -1,4 +1,44 @@
 <div class="container booking-container">
     <h1>Book a table</h1>
-    <p>A seat awaits in our candle-lit corner. Join us for an evening of unpolished sophistication in the heart of Södermalm.</p>
+    <p>Our tables are few, because deep conversations require space. Reserve your place in tonight’s story, and let us prepare a night of honest food, shared thoughts, and the beautiful unpredictability of a well-lived evening.</p>
+
+    <form class="booking">
+        <h2>Reservation details</h2>
+        <div class="booking-twocol">
+            <label class="half">Date
+                <input type="date">
+            </label>
+
+            <label class="half">Time
+                <input type="time">
+            </label>
+        </div>
+
+        <div>
+            <label>Number of guests
+                <input type="number" placeholder="2">
+            </label>
+        </div>
+
+        <div class="booking-twocol">
+            <label class="half">Full name
+                <input type="text" placeholder="Firstname Lastname">
+            </label>
+
+            <label class="half">Phone
+                <input type="tel" placeholder="+46 70 - 00 00 000">
+            </label>
+        </div>
+
+        <div>
+            <label>Special requests
+                <textarea>Allergies or celebratory notes...</textarea>
+            </label>
+        </div>
+
+        <button class="btn confirm-booking">Confirm request</button>
+
+        <p class="booking-info">Reservations are held for 15 minutes. Cancellations must be made 24 hours in advance.</p>
+
+    </form>
 </div>
