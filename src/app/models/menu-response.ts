@@ -1,1 +1,3 @@
-export interface MenuResponse {}
+export interface MenuResponse {
+    message: string;
+}

@@ -1,0 +1,10 @@
+.admin-container {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.admin-container h1 {
+    grid-column: 1 / 3;
+}

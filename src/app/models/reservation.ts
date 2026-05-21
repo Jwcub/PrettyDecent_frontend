@@ -1,1 +1,3 @@
-export interface Reservation {}
+export interface Reservation {
+    message: string;
+}
