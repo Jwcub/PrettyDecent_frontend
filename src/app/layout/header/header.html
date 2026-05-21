@@ -23,7 +23,14 @@
     </nav>
 
     <div class="header-actions">
+      @if(authService.isLoggedIn()) {
+        <button class="btn" routerLink="/admin">Admin</button>
+
+        <button class="btn logout-btn" (click)="logout()">Logout</button>
+      } @else {
         <button class="btn book-table" routerLink="/booking">Book a table</button>
+      }
+
     </div>
   </div>
 </header>

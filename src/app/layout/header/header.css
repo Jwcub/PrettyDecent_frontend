@@ -69,11 +69,13 @@ header {
 }
 
 .header-actions {
-  justify-self: end; 
+  justify-self: end;
+  display: flex;
+  gap: var(--space-sm); 
 }
 
 .book-table {
-  font-size: 0.75em;
+  font-size: var(--smal-text);
   letter-spacing: 1.2;
   padding: calc(var(--space-sm) + 4px) var(--space-lg);
 }
@@ -81,6 +83,21 @@ header {
 .book-table:hover {
   background-color: transparent;
   color: var(--text-dark);
+  border: 1px solid var(--primary-color);
+}
+
+.logout-btn {
+  font-size: var(--smal-text);
+  letter-spacing: 1.2;
+  padding: calc(var(--space-sm) + 4px) var(--space-lg);
+  background-color: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--text-dark)
+}
+
+.logout-btn:hover {
+  background-color: var( --tertiary-color);
+  color: var(--white);
   border: 1px solid var(--primary-color);
 }
 

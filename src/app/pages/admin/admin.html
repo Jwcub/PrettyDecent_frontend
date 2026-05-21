@@ -2,40 +2,46 @@
 
     <h1>Welcome Administrator!</h1>
 
-    <section>
-        <p>Display menu items</p>
-    </section>
+    <div class="admin-left">
+        <section class="show-menu-items">
+            <h2>Menu</h2>
+            @for(item of menuItems(); track item._id ) {
+                <li>{{ item.name }}, {{ item.description }}</li>
+            }
+        </section>
 
-    <section>
-        <p>Administrate table-bookings</p>
-    </section>
+        <section class="add-menu-item">
+            <h2>Add to menu</h2>
+            <p>Add new menu-item</p>
+        </section>
 
-    <section>
-        <p>Add new menu-item</p>
-    </section>
-    
-    <section>
-        <p>Check messages</p>
-    </section>
+        <section class="add-account">
+            <h2>Add new account</h2>
+            <form (ngSubmit)="register()">
+                <div>
+                    {{ message() }}
+                </div>
+                <label>Email:
+                    <input type="email" id="email" name="email" [(ngModel)]="email">
+                </label>
 
-    <section>
-        <h2>Add new account</h2>
-        <form (ngSubmit)="register()">
-            <div>
-                {{ message() }}
-            </div>
-            <label>Email::
-                <input type="email" id="email" name="email" [(ngModel)]="email">
-            </label>
+                <label>Password:
+                    <input type="password" id="password" name="password" [(ngModel)]="password">
+                </label>
 
-            <label>Password:
-                <input type="password" id="password" name="password" [(ngModel)]="password">
-            </label>
+                <button>Register account</button>
 
-            <button>Register account</button>
+            </form>
+        </section>
+    </div>
 
-        </form>
-    </section>
-    
-    
+    <div class="admin-right">
+        <section class="show-bookings">
+            <p>Administrate table-bookings</p>
+        </section>
+
+        <section class="show-messages">
+            <p>Check messages</p>
+        </section>
+    </div> 
 </div>

@@ -30,8 +30,6 @@ export class Login {
       this.message.set("Please fill in email and password");
       return
     }
-    
-    console.log(user);
 
     this.authService.login(user).subscribe({
       next: () => {

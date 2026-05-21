@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { RegisterResponse } from '../../models/register-response';
+import { MenuService } from '../../services/menu.service';
+import { MenuItem } from '../../models/menu';
 
 @Component({
   selector: 'app-admin',
@@ -30,8 +32,17 @@ export class Admin {
         this.password = "";
         this.message.set(res.message);
       }, 
-      error: (err) => this.message.set(err.error.message)
+      error: (err) => this.message.set(err.error.error)
     });
   }
 
+  menuMessage = signal("");
+  menuService = inject(MenuService)
+  menuItems = this.menuService.getMenuItems();
+
+  addMenuItem():void {
+
+  }
+
+ 
 }
