@@ -54,6 +54,7 @@ body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 101vh;
 }
 
 /* TYPOGRAPHY */
@@ -139,6 +140,7 @@ input[type="number"],
 input[type="tel"],
 input[type="date"],
 input[type="time"],
+input[type="password"],
 textarea,
 select {
     width: 100%;
