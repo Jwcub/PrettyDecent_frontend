@@ -1,3 +1,6 @@
 export interface Reservation {
-    message: string;
+    name: string;
+    phone: string;
+    date: Date;
+    guests: number;
 }

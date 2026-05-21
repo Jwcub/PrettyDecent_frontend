@@ -1,8 +1,9 @@
+export type MenuItemType = 'food' | 'drink';
+
 export interface MenuItem {
-    id: number;
     name: string;
     description: string;
-    type: string;
+    type: MenuItemType;
     category: string;
     price: number;
 }
