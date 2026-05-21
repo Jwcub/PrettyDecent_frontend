@@ -26,6 +26,13 @@ export class Login {
       password: this.password
     }
 
+    if(!this.email || !this.password){
+      this.message.set("Please fill in email and password");
+      return
+    }
+    
+    console.log(user);
+
     this.authService.login(user).subscribe({
       next: () => {
         this.router.navigate(['/admin'])

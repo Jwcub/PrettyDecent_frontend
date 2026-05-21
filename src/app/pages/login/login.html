@@ -3,17 +3,18 @@
     <p>This is an internal workspace for the hands that shape the night. Here, menus are locked into place and tables are arranged before the first guest arrives.</p>
 
     <form class="login" (ngSubmit)="login()">
-            <div>
-                {{ message() }}
-            </div>
         <label>Email
-                <input type="email">
+            <input type="email" name="email" [(ngModel)]="email">
         </label>
 
         <label>Password
-                <input type="password">
+                <input type="password" name="password" [(ngModel)]="password">
         </label>
 
         <button class="btn">Log in</button>
-     </form>
+
+        <div>
+            {{ message() }}
+        </div>
+    </form>
 </div>
