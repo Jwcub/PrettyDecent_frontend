@@ -1,4 +1,4 @@
-export type MenuItemType = 'food' | 'drink';
+export type MenuItemType = 'food' | 'drink' | null;
 
 export interface MenuItem {
     name: string;

@@ -4,7 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
 import { RegisterResponse } from '../../models/register-response';
 import { MenuService } from '../../services/menu.service';
-import { MenuItem } from '../../models/menu';
+import { MenuItem, MenuItemType } from '../../models/menu';
+import { MenuItemResponse } from '../../models/menu-response';
 
 @Component({
   selector: 'app-admin',
@@ -39,10 +40,50 @@ export class Admin {
   menuMessage = signal("");
   menuService = inject(MenuService)
   menuItems = this.menuService.getMenuItems();
+  editingId: string | null = null;
 
-  addMenuItem():void {
+  newMenuItem: MenuItem = {
+    name: "",
+    description: "",
+    type: null,
+    category: "",
+    price: 0
+  };
 
+  addMenuItem(): void {
+    this.menuService.addMenuItem(this.newMenuItem).subscribe({
+      next: (res: MenuItemResponse) => {
+        this.menuMessage.set("New menu item submited to menu");
+        this.newMenuItem.name = "";
+        this.newMenuItem.description = "";
+        this.newMenuItem.type = null;
+        this.newMenuItem.category = "";
+        this.newMenuItem.price = 0;
+      },
+      error: (err) => {
+        this.menuMessage.set(err.error?.message ?? `Ett okänt fel uppstod...`)
+      }
+    });
+  };
+
+  startEdit(id: string) {
+    this.editingId = id;
+  }
+  
+  saveEdit(menuItem: MenuItemResponse): void {
+    this.menuService.editMenuItem(menuItem._id, menuItem).subscribe({
+      next: (res: any) => {
+        this.menuMessage.set("Menu item has been updated");
+        this.editingId = null;
+      },
+      error: (err: any) => {
+        this.menuMessage.set(err.error?.message ?? `Could not update menu item`);
+      }
+    });
   }
 
- 
+  cancelEdit(): void {
+  this.editingId = null;
+  }
+
 }

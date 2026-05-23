@@ -9,48 +9,40 @@
         <article class="menu-section">
             <h2>Appetizers</h2>
 
-            <div class="menu-item">
-                <h3>Swedish oyster</h3>
-                <span>45</span>
-                <span>Shallot mignonette, fermented chili oil, lemon.</span>
-            </div>
+            @for(appetizer of appetizers(); track appetizer._id) {
+                <div class="menu-item">
+                    <h3>{{ appetizer.name }}</h3>
+                    <span>{{ appetizer.price }}</span>
+                    <span>{{ appetizer.description }}</span>
+                </div>
+            }
 
-            <div class="menu-item">
-                <h3>Nduja & Honey Toast</h3>
-                <span>115</span>
-                <span>Spicy calabrian pork spread, wildflower honey, toasted sourdough.</span>
-            </div>
         </article>
 
         <article class="menu-section">
             <h2>Main courses</h2>
 
-            <div class="menu-item">
-                <h3>Swedish oyster</h3>
-                <span>45</span>
-                <span>Shallot mignonette, fermented chili oil, lemon.</span>
-            </div>
+            @for(mainCourse of mainCourses(); track mainCourse._id) {
+                <div class="menu-item">
+                    <h3>{{ mainCourse.name }}</h3>
+                    <span>{{ mainCourse.price }}</span>
+                    <span>{{ mainCourse.description }}</span>
+                </div>
+            }
 
-            <div class="menu-item">
-                <h3>Nduja & Honey Toast</h3>
-                <span>115</span>
-                <span>Spicy calabrian pork spread, wildflower honey, toasted sourdough.</span>
-            </div>
         </article>
 
         <article class="menu-section">
             <h2>Deserts</h2>
-            <div class="menu-item">
-                <h3>Swedish oyster</h3>
-                <span>45</span>
-                <span>Shallot mignonette, fermented chili oil, lemon.</span>
-            </div>
+            
+            @for(dessert of desserts(); track dessert._id) {
+                <div class="menu-item">
+                    <h3>{{ dessert.name }}</h3>
+                    <span>{{ dessert.price }}</span>
+                    <span>{{ dessert.description }}</span>
+                </div>
+            }
 
-            <div class="menu-item">
-                <h3>Nduja & Honey Toast</h3>
-                <span>115</span>
-                <span>Spicy calabrian pork spread, wildflower honey, toasted sourdough.</span>
-            </div>
         </article>
 
         <div class="col2">
@@ -60,19 +52,25 @@
         <article class="menu-section">
             <h2>Wines</h2>
 
-            <div class="menu-item">
-                <span>Shallot mignonette, fermented chili oil, lemon.</span>
-                <span>45</span>
-            </div>
+            @for(wine of wines(); track wine._id) {
+                <div class="menu-item">
+                    <h3>{{ wine.name }}</h3>
+                    <span>{{ wine.price }}</span>
+                    <span>{{ wine.description }}</span>
+                </div>
+            }
         </article>
 
         <article class="menu-section">
             <h2>Other drinks</h2>
 
-            <div class="menu-item">
-                <span>Shallot mignonette, fermented chili oil, lemon.</span>
-                <span>45</span>
-            </div>
+            @for(otherDrink of otherDrinks(); track otherDrink._id) {
+                <div class="menu-item">
+                    <h3>{{ otherDrink.name }}</h3>
+                    <span>{{ otherDrink.price }}</span>
+                    <span>{{ otherDrink.description }}</span>
+                </div>
+            }
         </article>
     </section>
 

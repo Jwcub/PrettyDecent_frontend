@@ -29,4 +29,15 @@ export class MenuService {
 
     return this.http.post<MenuItemResponse>(this.url, menuItem, { headers });
   }
+
+    editMenuItem(id: number, menuItem: MenuItemResponse): Observable<MenuItemResponse> {
+    const token = localStorage.getItem("userToken");
+
+    // Create header
+    const headers = {
+      'Authorization' : `Bearer ${token}`,
+    }
+
+    return this.http.post<MenuItemResponse>(this.url + "/" + id, menuItem, { headers });
+  }
 }

@@ -2,46 +2,95 @@
 
     <h1>Welcome Administrator!</h1>
 
-    <div class="admin-left">
-        <section class="show-menu-items">
-            <h2>Menu</h2>
-            @for(item of menuItems(); track item._id ) {
-                <li>{{ item.name }}, {{ item.description }}</li>
-            }
-        </section>
+    <section class="show-bookings admin-block">
+        <p>Administrate table-bookings</p>
+    </section>
 
-        <section class="add-menu-item">
-            <h2>Add to menu</h2>
-            <p>Add new menu-item</p>
-        </section>
+    <section class="show-messages admin-block">
+        <p>Check messages</p>
+    </section>
 
-        <section class="add-account">
-            <h2>Add new account</h2>
-            <form (ngSubmit)="register()">
-                <div>
-                    {{ message() }}
+    <section class="admin-block show-menu-items">
+        <h2>Menu items</h2>
+        @for(item of menuItems(); track item._id ) {
+            <div class="menu-item">
+                <div><h3>{{ item.name }}</h3></div> 
+                <div><p>{{ item.description }}</p></div>
+                <div class="menu-item-tools">
+                    <span>{{ item.price }} kr</span> 
+                    <span>{{ item.type }}</span> 
+                    <span>{{ item.category }}</span> 
+                    @if(item.display === true) {
+                        <span>Show</span>
+                    }@else {
+                        <span>hide</span>
+                    }
+                    <span class="editbtn">Edit</span>
                 </div>
-                <label>Email:
-                    <input type="email" id="email" name="email" [(ngModel)]="email">
-                </label>
+                
+            </div>
+        }
+    </section>
 
-                <label>Password:
-                    <input type="password" id="password" name="password" [(ngModel)]="password">
-                </label>
+    <section class="admin-block add-menu-item">
+        <h2>Add to menu</h2>
+        <form class="post-menu-item" (ngSubmit)="addMenuItem()">
+            <label>Name
+                <input type="text" name="name" [(ngModel)]="newMenuItem.name">
+            </label>
 
-                <button>Register account</button>
+            <label>Description
+                <input type="text" name="description" [(ngModel)]="newMenuItem.description">
+            </label>
 
-            </form>
-        </section>
-    </div>
+            <select [(ngModel)]="newMenuItem.type" name="type">
+            <option [value]="null" disabled selected>-- Choose type --</option>
+            <option value="food">Food</option>
+            <option value="drink">Drink</option>
+            </select>
 
-    <div class="admin-right">
-        <section class="show-bookings">
-            <p>Administrate table-bookings</p>
-        </section>
+            
+            <label>Category
+                <select [(ngModel)]="newMenuItem.category" name="category">
+                    @if(newMenuItem.type === 'food') {
+                    <option value="appetizer">Appetizer</option>
+                    <option value="main">Main course</option>
+                    <option value="dessert">Dessert</option>
+                    } @else {
+                    <option value="wine">Wine</option>
+                    <option value="otherdrink">Other drink</option>
+                    }
+                </select>
+            </label>
+    
 
-        <section class="show-messages">
-            <p>Check messages</p>
-        </section>
-    </div> 
+            <label>Price
+                <input type="number" name="price" [(ngModel)]="newMenuItem.price">
+            </label>
+
+            <button class="btn">Add</button>
+        </form>
+
+        <p>{{ menuMessage() }}</p>
+
+    </section>
+
+    <section class="admin-block add-account">
+        <h2>Add new account</h2>
+        <form (ngSubmit)="register()">
+            <div>
+                {{ message() }}
+            </div>
+            <label>Email:
+                <input type="email" id="email" name="email" [(ngModel)]="email">
+            </label>
+
+            <label>Password:
+                <input type="password" id="password" name="password" [(ngModel)]="password">
+            </label>
+
+            <button class="btn">Register account</button>
+
+        </form>
+    </section>
 </div>
