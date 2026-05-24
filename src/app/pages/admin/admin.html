@@ -3,35 +3,84 @@
     <h1>Welcome Administrator!</h1>
 
     <section class="show-bookings admin-block">
-        <p>Administrate table-bookings</p>
+
     </section>
 
     <section class="show-messages admin-block">
         <p>Check messages</p>
     </section>
 
+
+    <!-- Show and edit menu items -->
     <section class="admin-block show-menu-items">
         <h2>Menu items</h2>
+
+        {{ menuMessage() }}
+
         @for(item of menuItems(); track item._id ) {
             <div class="menu-item">
+            @if (editingId === item._id) {
+                <input type="text" [(ngModel)]="item.name">
+
+                <textarea name="description" [(ngModel)]="item.description"></textarea>
+
+                <input type="number" [(ngModel)]="item.price">
+
+                <select [(ngModel)]="item.type" name="type">
+                    <option [value]="null" disabled selected>-- Choose type --</option>
+                    <option value="food">Food</option>
+                    <option value="drink">Drink</option>
+                 </select>
+
+                @if(item.type === 'food') {
+                <select [(ngModel)]="item.category" name="category">
+                    <option value="appetizer">Appetizer</option>
+                    <option value="main">Main course</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+                }@else {
+                <select [(ngModel)]="item.category" name="category">
+                    <option value="wine">Wine</option>
+                    <option value="otherdrink">Other drink</option>
+                </select>
+                }
+
+                <select [(ngModel)]="item.display" name="display">
+                    <option [ngValue]="true">Show</option>
+                    <option [ngValue]="false">Hide</option>
+
+                </select>
+
+                <button class="btn" (click)="saveEdit(item)">Spara ändringar</button>
+                <button class="btn" (click)="cancelEdit()">Avbryt</button>
+            } @else {
                 <div><h3>{{ item.name }}</h3></div> 
-                <div><p>{{ item.description }}</p></div>
-                <div class="menu-item-tools">
+                <div class="menu-item-price">
                     <span>{{ item.price }} kr</span> 
-                    <span>{{ item.type }}</span> 
-                    <span>{{ item.category }}</span> 
-                    @if(item.display === true) {
-                        <span>Show</span>
-                    }@else {
-                        <span>hide</span>
-                    }
-                    <span class="editbtn">Edit</span>
                 </div>
-                
-            </div>
+                <div class="menu-item-description"><p>{{ item.description }}</p></div>
+                <div class="menu-item-tools">
+                    <div>
+                        <span>{{ item.type }}</span> 
+                        <span>{{ item.category }}</span> 
+                    
+                        @if(item.display === true) {
+                            <span>Show</span>
+                        }@else {
+                            <span>hide</span>
+                        }
+                    </div>
+                    <div>
+                        <span class="editbtn" (click)="startEdit(item)">Edit</span>
+                        <span class="editbtn" (click)="startEdit(item)">Remove</span>
+                    </div>
+                </div>
+            }
+        </div>
         }
     </section>
 
+   <!-- Add menu item -->
     <section class="admin-block add-menu-item">
         <h2>Add to menu</h2>
         <form class="post-menu-item" (ngSubmit)="addMenuItem()">
@@ -44,11 +93,10 @@
             </label>
 
             <select [(ngModel)]="newMenuItem.type" name="type">
-            <option [value]="null" disabled selected>-- Choose type --</option>
-            <option value="food">Food</option>
-            <option value="drink">Drink</option>
+                <option [value]="null" disabled selected>-- Choose type --</option>
+                <option value="food">Food</option>
+                <option value="drink">Drink</option>
             </select>
-
             
             <label>Category
                 <select [(ngModel)]="newMenuItem.category" name="category">
@@ -63,7 +111,6 @@
                 </select>
             </label>
     
-
             <label>Price
                 <input type="number" name="price" [(ngModel)]="newMenuItem.price">
             </label>
@@ -71,22 +118,23 @@
             <button class="btn">Add</button>
         </form>
 
-        <p>{{ menuMessage() }}</p>
+        <p>{{ addMenuMessage() }}</p>
 
     </section>
+
 
     <section class="admin-block add-account">
         <h2>Add new account</h2>
         <form (ngSubmit)="register()">
             <div>
-                {{ message() }}
+                {{ userMessage() }}
             </div>
             <label>Email:
-                <input type="email" id="email" name="email" [(ngModel)]="email">
+                <input type="email" id="email" name="email" [(ngModel)]="newUser.email">
             </label>
 
             <label>Password:
-                <input type="password" id="password" name="password" [(ngModel)]="password">
+                <input type="password" id="password" name="password" [(ngModel)]="newUser.password">
             </label>
 
             <button class="btn">Register account</button>

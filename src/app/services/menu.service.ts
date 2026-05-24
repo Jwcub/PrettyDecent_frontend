@@ -30,7 +30,8 @@ export class MenuService {
     return this.http.post<MenuItemResponse>(this.url, menuItem, { headers });
   }
 
-    editMenuItem(id: number, menuItem: MenuItemResponse): Observable<MenuItemResponse> {
+  // Edit menu item
+  editMenuItem(id: string, menuItem: MenuItemResponse): Observable<MenuItemResponse> {
     const token = localStorage.getItem("userToken");
 
     // Create header
@@ -38,6 +39,6 @@ export class MenuService {
       'Authorization' : `Bearer ${token}`,
     }
 
-    return this.http.post<MenuItemResponse>(this.url + "/" + id, menuItem, { headers });
+    return this.http.put<MenuItemResponse>(this.url + "/" + id, menuItem, { headers });
   }
 }

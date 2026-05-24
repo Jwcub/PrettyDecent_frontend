@@ -15,33 +15,13 @@ import { MenuItemResponse } from '../../models/menu-response';
 })
 export class Admin {
 
-  email: string = "";
-  password: string = "";
-
-  message = signal("");
-  authService = inject(AuthService)
-
-  register():void {
-    const user: User = {
-      email: this.email,
-      password: this.password
-    }
-
-    this.authService.register(user).subscribe({
-      next: (res: RegisterResponse) => {
-        this.email = "";
-        this.password = "";
-        this.message.set(res.message);
-      }, 
-      error: (err) => this.message.set(err.error.error)
-    });
-  }
-
+  // Menu services
   menuMessage = signal("");
+  addMenuMessage = signal("");
   menuService = inject(MenuService)
   menuItems = this.menuService.getMenuItems();
-  editingId: string | null = null;
 
+  // Add new menu item
   newMenuItem: MenuItem = {
     name: "",
     description: "",
@@ -53,7 +33,7 @@ export class Admin {
   addMenuItem(): void {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
-        this.menuMessage.set("New menu item submited to menu");
+        this.addMenuMessage.set("New menu item submited to menu");
         this.newMenuItem.name = "";
         this.newMenuItem.description = "";
         this.newMenuItem.type = null;
@@ -61,13 +41,18 @@ export class Admin {
         this.newMenuItem.price = 0;
       },
       error: (err) => {
-        this.menuMessage.set(err.error?.message ?? `Ett okänt fel uppstod...`)
+        this.addMenuMessage.set(err.error?.message ?? `Ett okänt fel uppstod...`)
       }
     });
   };
 
-  startEdit(id: string) {
-    this.editingId = id;
+  // Allow editing of menu items
+  editingId: string | null = null;
+  editingMenuItem: MenuItemResponse | null = null; 
+
+  startEdit(item: MenuItemResponse): void {
+    this.editingId = item._id;
+    this.editingMenuItem = { ...item }; 
   }
   
   saveEdit(menuItem: MenuItemResponse): void {
@@ -77,7 +62,7 @@ export class Admin {
         this.editingId = null;
       },
       error: (err: any) => {
-        this.menuMessage.set(err.error?.message ?? `Could not update menu item`);
+        this.menuMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
       }
     });
   }
@@ -86,4 +71,28 @@ export class Admin {
   this.editingId = null;
   }
 
+  // Add new user account
+  userMessage = signal("");
+  authService = inject(AuthService);
+
+  newUser: User = {
+    email: "",
+    password: ""
+  }
+
+  register():void {
+    const user: User = {
+      email: this.newUser.email,
+      password: this.newUser.password
+    }
+
+    this.authService.register(user).subscribe({
+      next: (res: RegisterResponse) => {
+        this.newUser.email = "";
+        this.newUser.password = "";
+        this.userMessage.set(res.message);
+      }, 
+      error: (err) => this.userMessage.set(err.error.error)
+    });
+  }
 }

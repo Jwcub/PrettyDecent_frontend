@@ -15,23 +15,23 @@ export class Menu {
 
 
   appetizers = computed(() => 
-    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'appetizer')
+    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'appetizer' && item.display === true)
   );
 
   mainCourses = computed(() => 
-    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'main')
+    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'main' && item.display === true)
   );
 
   desserts = computed(() => 
-    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'dessert')
+    this.allMenuItems().filter(item => item.type === 'food' && item.category === 'dessert' && item.display === true)
   );
 
   wines = computed(() => 
-    this.allMenuItems().filter(item => item.type === 'drink' && item.category === 'wine')
+    this.allMenuItems().filter(item => item.type === 'drink' && item.category === 'wine' && item.display === true)
   );
 
   otherDrinks = computed(() => 
-    this.allMenuItems().filter(item => item.type === 'drink' && item.category === 'otherdrink')
+    this.allMenuItems().filter(item => item.type === 'drink' && item.category === 'otherdrink' && item.display === true)
   );
 
 }

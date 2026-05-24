@@ -27,15 +27,12 @@
     border: 1px solid var(--tertiary-color)
 }
 
-.show-menu-items {
-    
-}
-
 .menu-item {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     gap: var(--space-sm);
     margin-bottom: var(--space-xl);
+    margin-top: var(--space-sm);
 }
 
 .menu-item h3 {
@@ -43,15 +40,34 @@
     margin-bottom: 0;
 }
 
+.menu-item-description {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+}
+
 .menu-item p {
     margin-bottom: 0;
 }
 
 .menu-item-tools {
+    grid-column-start: 1;
+    grid-column-end: span 2;
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid var(--text-main);
-    text-transform: capitalize;
+    font-size: var(--smal-text);
+}
+
+.menu-item-tools > div > span {
+    padding-right: 12px;
+    text-transform: uppercase;
+}
+
+.menu-item-tools > div > span:last-child {
+    padding-right: 0;
+}
+
+.menu-item-price {
+    text-align: right;
 }
 
 .editbtn {
@@ -64,23 +80,12 @@
     text-decoration: none;
 }
 
-
-.show-bookings{
-}
-
-.add-menu-item {
-
-}
-
 .post-menu-item {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.show-messages {
-
-}
 
 .add-account form{
     display: flex;
