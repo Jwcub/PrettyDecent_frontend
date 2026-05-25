@@ -20,39 +20,39 @@
         @for(item of menuItems(); track item._id ) {
             <div class="menu-item">
             @if (editingId === item._id) {
-                <input type="text" [(ngModel)]="item.name">
+                <input type="text" [(ngModel)]="item.name" class="edit-field">
 
-                <textarea name="description" [(ngModel)]="item.description"></textarea>
+                <textarea name="description" [(ngModel)]="item.description" class="edit-field"></textarea>
 
-                <input type="number" [(ngModel)]="item.price">
+                <input type="number" [(ngModel)]="item.price" class="edit-field">
 
-                <select [(ngModel)]="item.type" name="type">
+                <select [(ngModel)]="item.type" name="type" class="edit-field">
                     <option [value]="null" disabled selected>-- Choose type --</option>
                     <option value="food">Food</option>
                     <option value="drink">Drink</option>
                  </select>
 
                 @if(item.type === 'food') {
-                <select [(ngModel)]="item.category" name="category">
+                <select [(ngModel)]="item.category" name="category" class="edit-field">
                     <option value="appetizer">Appetizer</option>
                     <option value="main">Main course</option>
                     <option value="dessert">Dessert</option>
                 </select>
                 }@else {
-                <select [(ngModel)]="item.category" name="category">
+                <select [(ngModel)]="item.category" name="category" class="edit-field">
                     <option value="wine">Wine</option>
                     <option value="otherdrink">Other drink</option>
                 </select>
                 }
 
-                <select [(ngModel)]="item.display" name="display">
+                <select [(ngModel)]="item.display" name="display" class="edit-field">
                     <option [ngValue]="true">Show</option>
                     <option [ngValue]="false">Hide</option>
 
                 </select>
 
                 <button class="btn" (click)="saveEdit(item)">Spara ändringar</button>
-                <button class="btn" (click)="cancelEdit()">Avbryt</button>
+                <button class="btn cancelbtn" (click)="cancelEdit()">Avbryt</button>
             } @else {
                 <div><h3>{{ item.name }}</h3></div> 
                 <div class="menu-item-price">

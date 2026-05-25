@@ -31,8 +31,15 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--space-sm);
-    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid #ccc;
+    margin-bottom: var(--space-md);
     margin-top: var(--space-sm);
+}
+
+.menu-item:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
 }
 
 .menu-item h3 {
@@ -70,10 +77,26 @@
     text-align: right;
 }
 
+.edit-field {
+    grid-column: span 2;
+}
+
 .editbtn {
     text-decoration: underline;
     cursor: pointer;
     width: 30px;
+}
+
+.cancelbtn {
+    background-color: transparent;
+    border: 1px solid var(--tertiary-color);
+    color: var(--text-main)
+}
+
+.cancelbtn:hover {
+    background-color: var(--secondary-color);
+    border: 1px solid transparent;
+    color: var(--white);
 }
 
 .editbtn:hover {
