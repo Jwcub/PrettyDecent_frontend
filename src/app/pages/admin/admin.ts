@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
@@ -15,11 +15,20 @@ import { MenuItemResponse } from '../../models/menu-response';
 })
 export class Admin {
 
-  // Menu services
+  /* 
+  ** MENU SERVICES **
+  */
+
   menuMessage = signal("");
   addMenuMessage = signal("");
   menuService = inject(MenuService)
-  menuItems = this.menuService.getMenuItems();
+  menuItems = signal<MenuItemResponse[]>([]);
+
+  ngOnInit(): void {
+    this.menuService.getMenuItems().subscribe(items => {
+      this.menuItems.set(items);
+    });
+  }
 
   // Add new menu item
   newMenuItem: MenuItem = {
@@ -71,7 +80,24 @@ export class Admin {
   this.editingId = null;
   }
 
-  // Add new user account
+  removeItem(item: MenuItemResponse): void {
+    this.menuService.removeMenuItem(item._id).subscribe({
+      next: (res: any) => {
+        this.menuItems.update(items => items.filter(i => i._id !== item._id));
+        this.menuMessage.set("Menu item has been removed");
+
+      },
+      error: (err: any) => {
+        this.menuMessage.set(err.error?.message ?? `Something went wrong, menu item wasn't removed`);
+      }
+    });
+  }
+
+
+  /*
+  ** ADD NEW USER
+  */
+
   userMessage = signal("");
   authService = inject(AuthService);
 

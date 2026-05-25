@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
+import { MenuItemResponse } from '../../models/menu-response';
 
 @Component({
   selector: 'app-menu',
@@ -10,9 +11,14 @@ import { MenuService } from '../../services/menu.service';
 export class Menu {
 
   menuService = inject(MenuService)
-  allMenuItems = this.menuService.getMenuItems();
+  allMenuItems = signal<MenuItemResponse[]>([]);
   message = signal ("");
 
+  ngOnInit(): void {
+    this.menuService.getMenuItems().subscribe(items => {
+      this.allMenuItems.set(items);
+    });
+  }
 
   appetizers = computed(() => 
     this.allMenuItems().filter(item => item.type === 'food' && item.category === 'appetizer' && item.display === true)

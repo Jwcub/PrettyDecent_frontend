@@ -4,6 +4,7 @@ import { MenuItem } from '../models/menu';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { MenuItemResponse } from '../models/menu-response';
+import { RemoveResponse } from '../models/remove-response';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,9 @@ export class MenuService {
   url: string = "http://localhost:5500/api/menu";
 
   // Get menu items
-  getMenuItems(): Signal<MenuItemResponse[]> {
-    const menuItems$ = this.http.get<MenuItemResponse[]>(this.url);
-    return toSignal(menuItems$, { initialValue: []});
-  }
+ getMenuItems(): Observable<MenuItemResponse[]> {
+  return this.http.get<MenuItemResponse[]>(this.url);
+}
 
   // Add new menu item
   addMenuItem(menuItem: MenuItem): Observable<MenuItemResponse> {
@@ -40,5 +40,17 @@ export class MenuService {
     }
 
     return this.http.put<MenuItemResponse>(this.url + "/" + id, menuItem, { headers });
+  }
+
+  // Remove menu item
+  removeMenuItem(id: string) {
+    const token = localStorage.getItem("userToken");
+
+    // Create header
+    const headers = {
+      'Authorization' : `Bearer ${token}`,
+    }
+
+    return this.http.delete<RemoveResponse>(this.url + "/" + id, { headers });  
   }
 }
