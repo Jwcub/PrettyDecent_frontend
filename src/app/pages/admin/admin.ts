@@ -24,13 +24,14 @@ export class Admin {
   menuService = inject(MenuService)
   menuItems = signal<MenuItemResponse[]>([]);
 
+  // Load menu items upon pageload
   ngOnInit(): void {
     this.menuService.getMenuItems().subscribe(items => {
       this.menuItems.set(items);
     });
   }
 
-  // Add new menu item
+  // Add a new menu item
   newMenuItem: MenuItem = {
     name: "",
     description: "",
@@ -42,7 +43,7 @@ export class Admin {
   addMenuItem(): void {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
-        this.menuItems.update(currentItems => [...currentItems, res]);
+        this.menuItems.update(currentMenuItems => [...currentMenuItems, res]);
         this.addMenuMessage.set("New menu item submited to menu");
         this.newMenuItem.name = "";
         this.newMenuItem.description = "";
@@ -51,7 +52,7 @@ export class Admin {
         this.newMenuItem.price = 0;
       },
       error: (err) => {
-        this.addMenuMessage.set(err.error?.message ?? `Ett okänt fel uppstod...`)
+        this.addMenuMessage.set(err.error?.message ?? `Unknown error occured`)
       }
     });
   };
@@ -81,6 +82,7 @@ export class Admin {
   this.editingId = null;
   }
 
+  // Remove menu item
   removeItem(item: MenuItemResponse): void {
     this.menuService.removeMenuItem(item._id).subscribe({
       next: (res: any) => {
@@ -93,7 +95,6 @@ export class Admin {
       }
     });
   }
-
 
   /*
   ** ADD NEW USER
