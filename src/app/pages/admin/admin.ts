@@ -42,6 +42,7 @@ export class Admin {
   addMenuItem(): void {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
+        this.menuItems.update(currentItems => [...currentItems, res]);
         this.addMenuMessage.set("New menu item submited to menu");
         this.newMenuItem.name = "";
         this.newMenuItem.description = "";
