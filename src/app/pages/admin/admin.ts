@@ -10,10 +10,11 @@ import { BookingService } from '../../services/booking.service';
 import { ReservationResponse } from '../../models/reservation-response';
 import { MessageService } from '../../services/message.service';
 import { Message } from '../../models/message';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-admin',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })
@@ -77,8 +78,29 @@ export class Admin {
   /*
   ** MESSAGES
   */
+  messageMessages = signal("");
   messageService = inject(MessageService);
   messages = this.messageService.getMessages();
+
+  changeStatus(message: Message): void {
+    if (!message._id) {
+      console.error("Could not update message status.");
+      this.messageMessages.set("Could not update message status.");
+      return; 
+    }
+
+    console.log(message);
+
+    this.messageService.updateMessageStatus(message._id, message).subscribe({
+      next: (res: any) => {
+        this.messageMessages.set("Message status has been changed");
+      },
+      error: (err: any) => {
+        this.messageMessages.set(err.error?.message ?? `Could not update menu item ${err.message}`);
+      }
+    });
+  }
+
 
   /* 
   ** MENU SERVICES **

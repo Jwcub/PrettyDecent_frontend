@@ -28,4 +28,18 @@ export class MessageService {
     const messages$ = this.http.get<Message[]>(this.url, { headers });
     return toSignal(messages$, { initialValue: []});
   }
+
+  // Update message status
+  updateMessageStatus(id: string, message: Message): Observable<MessageResponse> {
+    
+    const token = localStorage.getItem("userToken");
+
+    // Create header
+    const headers = {
+      'Authorization' : `Bearer ${token}`,
+    }
+
+    return this.http.put<Message>(this.url + "/" + id, message, { headers });
+  }
+
 }

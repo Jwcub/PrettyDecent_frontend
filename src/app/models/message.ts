@@ -5,7 +5,7 @@ export interface Message {
     email: string;
     title: string;
     message: string;
-    _id?: number;
+    _id?: string;
     status?: MessageStatus;
     created?: Date;
     __v?: number;
