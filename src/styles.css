@@ -3,6 +3,7 @@
     --primary-color: #23492F;
     --secondary-color: #2D1E17;
     --tertiary-color: #061B0E;
+    --muted: #818481;
 
     --text-dark: #1B1C19;
     --text-main: #434843;
@@ -108,7 +109,7 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
-.btn {
+.btn, .secondary-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -117,11 +118,21 @@ a:hover, a:focus {
     font-weight: 500;
     text-transform: uppercase;
     padding: var(--space-sm) var(--space-lg);
+    
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
     border: 1px solid transparent;
     background-color: var(--primary-color);
     color: var(--text-white);
-    text-decoration: none;
-    cursor: pointer;
+}
+
+.secondary-btn {
+    border: 1px solid var(--tertiary-color);
+    background-color: transparent;
+    color: var(--text-main);
 }
 
 .btn:hover {
@@ -133,6 +144,11 @@ a:hover, a:focus {
       transform: scale(0.98);
 }
 
+.secondary-btn:hover {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+}
+
 /* FORMS */
 input[type="text"],
 input[type="email"],
@@ -141,6 +157,7 @@ input[type="tel"],
 input[type="date"],
 input[type="time"],
 input[type="password"],
+input[type="datetime"],
 textarea,
 select {
     width: 100%;

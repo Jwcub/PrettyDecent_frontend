@@ -3,10 +3,91 @@
     <h1>Welcome Administrator!</h1>
 
     <section class="show-bookings admin-block">
+        <h2>Reservations</h2>
+        {{ reservationMessage() }}
+        @for(reservation of currentReservations(); track reservation._id) {
+            <article class="reservation">
+                @if (editingId === reservation._id) {
+                    <form class="edit-reservation">
+                        <label> Date:
+                            <input type="datetime" [(ngModel)]="reservation.date" name="date" class="edit-field">
+                        </label>
+
+                        <label> Guests:
+                            <input type="number" [(ngModel)]="reservation.guests" name="guests" class="edit-field">
+                        </label>
+
+                        <label> Name:
+                            <input type="text" [(ngModel)]="reservation.name" name="name" class="edit-field">
+                        </label>
+
+                        <label> Requests:
+                            <textarea [(ngModel)]="reservation.requests" name="requests" class="edit-field"></textarea>
+                        </label>
+
+                        <label>Status:
+                            <select [(ngModel)]="reservation.status" name="status" class="edit-field">
+                                <option value="newBooking">New</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </label>
+
+                        <div class="edit-reservation-buttons">
+                            <button (click)="saveUpdatedReservation(reservation)" class="btn">Uppdate</button>
+                            <button (click)="cancelEdit()" class="secondary-btn">Cancel</button>
+                        </div>
+                        
+                    </form>
+                } @else {
+                <div class="res-block res-date">
+                    <span class="res-label">Date</span>
+                    <span>{{ displayDate(reservation.date) }}</span>
+                </div>
+                <div class="res-block res-guests">
+                    <span class="res-label">Guests</span>
+                    <span>{{ reservation.guests }}</span>
+                </div>
+                <div class="res-block res-name">
+                    <span class="res-label">Name</span>
+                    <span>{{ reservation.name }}</span>
+                </div>
+                <div class="res-block res-requests">
+                    <span class="res-label">Requests</span>
+                    <span> 
+                        @if(reservation.requests === "") {
+                            -
+                        } @else {
+                            {{ reservation.requests }}
+                        }
+                     </span>
+                </div>
+                <div class="res-block res-status">
+                    <span class="res-label">Status</span>
+                    <div>
+                        @if(reservation.status === "newBooking"){
+                            <span class="res-status-block res-new">New</span>
+
+                        }@if(reservation.status === "confirmed"){
+                            <span class="res-status-block res-confirmed">Confirmed</span>
+
+                        } @if(reservation.status === "cancelled"){
+                            <span class="res-status-block res-cancelled">Cancelled</span>
+                        }
+                    
+                    </div>
+                </div>
+                <div class="res-block res-tools">
+                    <button (click)="editReservation(reservation)" class="btn res-edit"><span class="material-symbols-outlined res-edit-icon">edit</span>Edit</button>
+                </div>
+                }
+            </article>
+        }
 
     </section>
 
     <section class="show-messages admin-block">
+        <h2>Messages</h2>
         <p>Check messages</p>
     </section>
 

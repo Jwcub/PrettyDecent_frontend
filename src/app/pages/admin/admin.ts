@@ -1,4 +1,4 @@
-import { Component, inject, signal, Signal } from '@angular/core';
+import { Component, computed, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
@@ -6,6 +6,8 @@ import { RegisterResponse } from '../../models/register-response';
 import { MenuService } from '../../services/menu.service';
 import { MenuItem, MenuItemType } from '../../models/menu';
 import { MenuItemResponse } from '../../models/menu-response';
+import { BookingService } from '../../services/booking.service';
+import { ReservationResponse } from '../../models/reservation-response';
 
 @Component({
   selector: 'app-admin',
@@ -14,11 +16,66 @@ import { MenuItemResponse } from '../../models/menu-response';
   styleUrl: './admin.css',
 })
 export class Admin {
+  editingId: string | null = null;
+
+  /*
+  ** TABLE RESERVATIONS
+  */
+  reservationMessage = signal("");
+  bookingService = inject(BookingService);
+  reservations = this.bookingService.getReservations();
+
+  // Hide reservations that have past
+currentReservations = computed(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return this.reservations().filter(
+    res => new Date(res.date) > today
+  );
+});
+
+  // Show time in format YYYY-MM-DD, hh:mm
+  displayDate(dateObject: Date): String {
+    if (!dateObject) return "";
+    const d = new Date(dateObject);
+    const offset = d.getTimezoneOffset() * 60000;
+    const dateTime = new Date(d.getTime() - offset).toISOString();
+    const date = dateTime.slice(0, 10);
+    const time = dateTime.slice(11, 16);
+    return time === "00:00" ? date : `${date}, ${time}`;
+  }
+
+  // Edit Reservation
+  editingReservation: ReservationResponse | null = null; 
+  
+  editReservation(reservation: ReservationResponse): void {
+    this.editingId = reservation._id;
+    this.editingReservation = { ...reservation }; 
+  }
+  
+  // Update reservation
+  saveUpdatedReservation(reservation: ReservationResponse): void {
+    this.bookingService.editReservation(reservation._id, reservation).subscribe({
+      next: (res: any) => {
+        this.reservationMessage.set("Reservation has been updated");
+        this.editingId = null;
+        console.log('Uppdaterad:', res);
+      },
+      error: (err: any) => {
+        this.reservationMessage.set(err.error?.message ?? `Could not update reservation ${err.message}`);
+      }
+    });
+  }
+
+  // Cancel editing reservation
+  cancelEdit(): void {
+  this.editingId = null;
+  }
+
 
   /* 
   ** MENU SERVICES **
   */
-
   menuMessage = signal("");
   addMenuMessage = signal("");
   menuService = inject(MenuService)
@@ -57,8 +114,7 @@ export class Admin {
     });
   };
 
-  // Allow editing of menu items
-  editingId: string | null = null;
+  // Edit reservation
   editingMenuItem: MenuItemResponse | null = null; 
 
   startEdit(item: MenuItemResponse): void {
@@ -76,10 +132,6 @@ export class Admin {
         this.menuMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
       }
     });
-  }
-
-  cancelEdit(): void {
-  this.editingId = null;
   }
 
   // Remove menu item

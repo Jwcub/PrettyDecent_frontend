@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './booking.css',
 })
 export class Booking {
-
   bookingService = inject(BookingService);
   message = signal("");
 
@@ -27,9 +26,6 @@ export class Booking {
   }
 
   bookTable():void {
-    console.log(this.dateInput);
-    console.log(this.timeInput);
-
     if (!this.dateInput || !this.timeInput) {
       this.message.set("Please enter date and/or time")
       return;
