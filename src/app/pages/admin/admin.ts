@@ -8,6 +8,8 @@ import { MenuItem, MenuItemType } from '../../models/menu';
 import { MenuItemResponse } from '../../models/menu-response';
 import { BookingService } from '../../services/booking.service';
 import { ReservationResponse } from '../../models/reservation-response';
+import { MessageService } from '../../services/message.service';
+import { Message } from '../../models/message';
 
 @Component({
   selector: 'app-admin',
@@ -26,17 +28,17 @@ export class Admin {
   reservations = this.bookingService.getReservations();
 
   // Hide reservations that have past
-currentReservations = computed(() => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return this.reservations().filter(
-    res => new Date(res.date) > today
-  );
-});
+  currentReservations = computed(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return this.reservations().filter(
+      res => new Date(res.date) > today
+    );
+  });
 
   // Show time in format YYYY-MM-DD, hh:mm
-  displayDate(dateObject: Date): String {
-    if (!dateObject) return "";
+  displayDate(dateObject: Date | undefined): string {
+    if (!dateObject) return "Couldn't read time";
     const d = new Date(dateObject);
     const offset = d.getTimezoneOffset() * 60000;
     const dateTime = new Date(d.getTime() - offset).toISOString();
@@ -72,6 +74,11 @@ currentReservations = computed(() => {
   this.editingId = null;
   }
 
+  /*
+  ** MESSAGES
+  */
+  messageService = inject(MessageService);
+  messages = this.messageService.getMessages();
 
   /* 
   ** MENU SERVICES **

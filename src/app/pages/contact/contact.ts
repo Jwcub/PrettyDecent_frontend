@@ -22,6 +22,11 @@ export class Contact {
 
 
   sendMessage():void {
+    if( this.name === "" || this.email === "" || this.email === "" || this.message === "") {
+      this.apiMessage.set("Fill in required fields");
+      return;
+    }
+
     const message : Message =  {
       name : this.name,
       email : this.email,

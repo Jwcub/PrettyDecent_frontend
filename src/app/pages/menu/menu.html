@@ -1,78 +1,78 @@
 <div class="container menu-container">
-    <section class="menu-title">
+    <div class="menu-title">
         <p class="menu-title_open">Tuesday - Saturday</p>
         <h1>The Daily Menu</h1>
         <p class="menu-title_location">Pretty Decent •  Södermalm</p>
-    </section>
+    </div>
 
-    <section class="menu">
-        <article class="menu-section">
+    <div class="menu">
+        <section class="menu-section">
             <h2>Appetizers</h2>
 
             @for(appetizer of appetizers(); track appetizer._id) {
-                <div class="menu-item">
-                    <h3>{{ appetizer.name }}</h3>
-                    <span>{{ appetizer.price }}</span>
-                    <span>{{ appetizer.description }}</span>
-                </div>
+                <article class="menu-item">
+                    <h3 class="menu-item_title">{{ appetizer.name }}</h3>
+                    <span class="menu-item_price">{{ appetizer.price }}</span>
+                    <span class="menu-item_desc">{{ appetizer.description }}</span>
+                </article>
             }
 
-        </article>
+        </section>
 
-        <article class="menu-section">
+        <section class="menu-section">
             <h2>Main courses</h2>
 
             @for(mainCourse of mainCourses(); track mainCourse._id) {
-                <div class="menu-item">
-                    <h3>{{ mainCourse.name }}</h3>
-                    <span>{{ mainCourse.price }}</span>
-                    <span>{{ mainCourse.description }}</span>
-                </div>
+                <article class="menu-item">
+                    <h3 class="menu-item_title">{{ mainCourse.name }}</h3>
+                    <span class="menu-item_price">{{ mainCourse.price }}</span>
+                    <span class="menu-item_desc">{{ mainCourse.description }}</span>
+                </article>
             }
 
-        </article>
+        </section>
 
-        <article class="menu-section">
+        <section class="menu-section">
             <h2>Deserts</h2>
             
             @for(dessert of desserts(); track dessert._id) {
-                <div class="menu-item">
-                    <h3>{{ dessert.name }}</h3>
-                    <span>{{ dessert.price }}</span>
-                    <span>{{ dessert.description }}</span>
-                </div>
+                <article class="menu-item">
+                    <h3 class="menu-item_title">{{ dessert.name }}</h3>
+                    <span class="menu-item_price">{{ dessert.price }}</span>
+                    <span class="menu-item_desc">{{ dessert.description }}</span>
+                </article>
             }
 
-        </article>
+        </section>
 
         <div class="col2">
             <img src="food.png" alt="Fish dish" class="imageframe">
         </div>
 
-        <article class="menu-section">
+        <section class="menu-section">
             <h2>Wines</h2>
 
             @for(wine of wines(); track wine._id) {
-                <div class="menu-item">
-                    <h3>{{ wine.name }}</h3>
-                    <span>{{ wine.price }}</span>
-                    <span>{{ wine.description }}</span>
-                </div>
+                <article class="menu-item">
+                    <h3 class="menu-item_title">{{ wine.name }}</h3>
+                    <span class="menu-item_price">{{ wine.price }}</span>
+                    <span class="menu-item_desc">{{ wine.description }}</span>
+                </article>
             }
-        </article>
+        </section>
 
-        <article class="menu-section">
+        <section class="menu-section">
             <h2>Other drinks</h2>
 
             @for(otherDrink of otherDrinks(); track otherDrink._id) {
-                <div class="menu-item">
-                    <h3>{{ otherDrink.name }}</h3>
-                    <span>{{ otherDrink.price }}</span>
-                    <span>{{ otherDrink.description }}</span>
-                </div>
+                <article class="menu-item">
+                    <h3 class="menu-item_title">{{ otherDrink.name }}</h3>
+                    <span class="menu-item_price">{{ otherDrink.price }}</span>
+                    <span class="menu-item_desc">{{ otherDrink.description }}</span>
+                </article>
             }
-        </article>
-    </section>
+        </section>
+    </div>
 
 
 </div>

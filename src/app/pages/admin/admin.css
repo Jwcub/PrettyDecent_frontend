@@ -55,15 +55,18 @@
 }
 
 .res-new {
-    background-color: yellow;
+    background-color: lightgoldenrodyellow;
+    color: var(--text-dark);
 }
 
 .res-confirmed {
-    background-color: green;
+    background-color: lightgreen;
+    color: var(--text-dark);
 }
 
 .res-cancelled {
-    background-color: red;
+    background-color: lightcoral;
+    color: var(--text-dark);
 }
 
 .res-label {
@@ -101,6 +104,73 @@
     margin-top: var(--space-sm);
     display: flex;
     gap: var(--space-md);
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-xl);
+}
+
+.message h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3em;
+}
+
+.message-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+}
+
+.message-status_new {
+    font-size: var(--smal-text);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: lightgoldenrodyellow;
+    color: var(--text-dark);
+}
+
+.message-status_pending {
+    font-size: var(--smal-text);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: lightblue;
+    color: var(--text-dark);
+}
+
+.message-status_answered {
+    font-size: var(--smal-text);
+    padding: var(--space-xs) var(--space-sm);
+    background-color: lightgreen;
+    color: var(--text-dark);
+}
+
+.message-label {
+    text-transform: uppercase;
+    font-size: var(--smal-text);
+    color: var(--muted);
+}
+
+.message-tools {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    border-top: 1px dotted #ccc;
+}
+
+.message-tools button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: var(--space-xs) 0;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    line-height: 2em;
 }
 
 .menu-item {

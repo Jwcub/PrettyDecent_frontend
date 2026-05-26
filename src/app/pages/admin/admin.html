@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="res-block res-tools">
-                    <button (click)="editReservation(reservation)" class="btn res-edit"><span class="material-symbols-outlined res-edit-icon">edit</span>Edit</button>
+                    <button (click)="editReservation(reservation)" class="btn res-edit"><span class="material-icons res-edit-icon">edit</span>Edit</button>
                 </div>
                 }
             </article>
@@ -88,7 +88,26 @@
 
     <section class="show-messages admin-block">
         <h2>Messages</h2>
-        <p>Check messages</p>
+        @for(message of messages(); track message._id) {
+            <article class="message">
+                <div class="message-title"><h3>{{ message.title }}</h3> 
+                    <div class="message-status">
+                        @if(message.status === "new") {<span class="message-status_new">New message</span>}
+                        @if(message.status === "pending") {<span class="message-status_pending">Pending</span>}
+                        @if(message.status === "answered") {<span class="message-status_answered">Answered</span>}
+                    </div>
+                </div>
+                <div class="message-timestamp"> <span class="message-label">Recieved:</span> {{displayDate(message.created) || null }}</div>
+                <div class="message-sender"> <span class="message-label">From:</span> {{ message.name }}, {{ message.email }}</div>
+                <div class="message-message"><span class="message-label">Message:</span> <br> {{ message.message }}</div>
+                
+                <div class="message-tools">
+                    <button><span class="material-icons res-edit-icon">edit</span>Edit</button>
+
+                    <button><span class="material-icons res-edit-icon">delete</span>Remove</button>
+                </div>
+            </article>
+        }
     </section>
 
 
