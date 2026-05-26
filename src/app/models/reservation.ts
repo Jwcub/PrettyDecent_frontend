@@ -3,4 +3,5 @@ export interface Reservation {
     phone: string;
     date: Date;
     guests: number;
+    requests: string;
 }

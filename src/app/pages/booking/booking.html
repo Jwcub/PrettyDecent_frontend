@@ -2,41 +2,42 @@
     <h1>Book a table</h1>
     <p>Our tables are few, because deep conversations require space. Reserve your place in tonight’s story, and let us prepare a night of honest food, shared thoughts, and the beautiful unpredictability of a well-lived evening.</p>
 
-    <form class="user-form booking">
+    <form class="user-form booking" (ngSubmit)="bookTable()">
         <h2>Reservation details</h2>
         <div class="booking-twocol">
             <label class="half">Date
-                <input type="date">
+                <input type="date" name="formDate" [(ngModel)]="dateInput">
             </label>
 
             <label class="half">Time
-                <input type="time">
+                <input type="time" name="formTime" [(ngModel)]="timeInput">
             </label>
         </div>
 
         <div>
             <label>Number of guests
-                <input type="number" placeholder="2">
+                <input type="number" placeholder="2" name="guests" [(ngModel)]="newBooking.guests">
             </label>
         </div>
 
         <div class="booking-twocol">
             <label class="half">Full name
-                <input type="text" placeholder="Firstname Lastname">
+                <input type="text" placeholder="Firstname Lastname" name="name" [(ngModel)]="newBooking.name">
             </label>
 
             <label class="half">Phone
-                <input type="tel" placeholder="+46 70 - 00 00 000">
+                <input type="tel" placeholder="+46 70 - 00 00 000" name="phone" [(ngModel)]="newBooking.phone">
             </label>
         </div>
 
         <div>
             <label>Special requests
-                <textarea>Allergies or celebratory notes...</textarea>
+                <textarea name="request" placeholder="Allergies or celebratory notes..." [(ngModel)]="newBooking.requests">A</textarea>
             </label>
         </div>
 
         <button class="btn confirm-booking">Confirm request</button>
+        <p>{{ message()}}</p>
 
         <p class="booking-info">Reservations are held for 15 minutes. Cancellations must be made 24 hours in advance.</p>
 

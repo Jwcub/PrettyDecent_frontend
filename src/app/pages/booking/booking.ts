@@ -1,9 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { BookingService } from '../../services/booking.service';
+import { Reservation } from '../../models/reservation';
+import { ReservationResponse } from '../../models/reservation-response';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './booking.html',
   styleUrl: './booking.css',
 })
-export class Booking {}
+export class Booking {
+
+  bookingService = inject(BookingService);
+  message = signal("");
+
+  dateInput: string = "";
+  timeInput: string = "";
+
+  newBooking = {
+    name: "",
+    phone: "",
+    date: new Date(),
+    guests:  0,
+    requests: ""
+  }
+
+  bookTable():void {
+    console.log(this.dateInput);
+    console.log(this.timeInput);
+
+    if (!this.dateInput || !this.timeInput) {
+      this.message.set("Please enter date and/or time")
+      return;
+    }
+
+    const dateTimeString = `${this.dateInput}T${this.timeInput}`;
+    this.newBooking.date = new Date(dateTimeString);;
+
+    this.bookingService.makeReservation(this.newBooking).subscribe({
+      next: (res: ReservationResponse) => {
+      },
+      error: (err) => {
+        this.message.set(err.error?.message ?? `Unknown error occured`)
+      }
+    });
+  }
+}
