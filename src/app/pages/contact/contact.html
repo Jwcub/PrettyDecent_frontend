@@ -11,15 +11,28 @@
         </section>
 
         <section>
-            <form class="user-form contactform">
-                <label>Name</label>
-                <input type="text">
+            <form class="user-form contactform" (ngSubmit)="sendMessage()">
+                <label>Name *
+                    <input required minlength="3" type="text" name="name" [(ngModel)]="name">
+                </label>
 
-                <label>Email</label>
-                <input type="email">
+                <label>Email *
+                    <input required minlength="10" type="email" name="email" [(ngModel)]="email">
+                </label>
 
-                <label>Message</label>
-                <textarea></textarea>
+                <label>Title *
+                    <input type="text" name="title" [(ngModel)]="title">
+                </label>
+
+                <label>Message *
+                    <textarea name="message" [(ngModel)]="message"></textarea>
+                </label>
+
+                <button class="btn submit-message">Send</button>
+
+                <p>* Required field</p>
+
+                <p>{{ apiMessage()}}</p>
             </form>
         </section>
     </div>

@@ -10,6 +10,9 @@
 }
 
 .contactform {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
     background-color: #F5F3EE;
     padding: var(--space-xl);
 }
@@ -17,4 +20,9 @@
 .contactform label {
     font-size: 12px;
     text-transform: capitalize;
+}
+
+.submit-message {
+    align-items: flex-start;
+    width: fit-content;
 }
