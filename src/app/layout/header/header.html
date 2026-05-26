@@ -19,8 +19,8 @@
         <li><a routerLink="/about" routerLinkActive="active" (click)="isMenuOpen = false">About</a></li>
         <li><a routerLink="/contact" routerLinkActive="active" (click)="isMenuOpen = false">Contact</a></li>
         @if(authService.isLoggedIn()) {
-          <li class="mobile-only"><button class="btn" routerLink="/admin">Admin</button></li>
-          <li class="mobile-only"> <button class="btn logout-btn" (click)="logout()">Logout</button></li>
+          <li class="mobile-only"><button class="btn book-table" routerLink="/admin">Admin</button></li>
+          <li class="mobile-only"> <button class="secondary-btn book-table" (click)="logout()">Logout</button></li>
         }@else {
         <li class="mobile-only"><button class="btn book-table" routerLink="/booking" (click)="isMenuOpen = false">Book table</button></li>
         }
@@ -29,7 +29,7 @@
 
     <div class="header-actions">
       @if(authService.isLoggedIn()) {
-        <button class="btn" routerLink="/admin">Admin</button>
+        <button class="btn book-table" routerLink="/admin">Admin</button>
 
         <button class="btn logout-btn" (click)="logout()">Logout</button>
       } @else {

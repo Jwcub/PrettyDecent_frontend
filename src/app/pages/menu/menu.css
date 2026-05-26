@@ -80,7 +80,9 @@
     .menu {
         grid-template-columns: 1fr;
     }
+
+    .menu-title_location::before,
+    .menu-title_location::after {
+        display: none;
+    }
 }
-
-
-
