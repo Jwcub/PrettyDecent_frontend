@@ -1,14 +1,12 @@
 <div class="container contact-container">
-    <h1>Contact us</h1>
-    <p>A seat awaits in our candle-lit corner. Join us for an evening of unpolished sophistication in the heart of Södermalm.</p>
+    <h1>Let’s Connect</h1>
+    <p>We’d love to hear from you! Whether you have a question about our menu, want to book a large event, or just want to say hello, feel free to reach out.</p>
 
     <div class="contact-grid">
-        <section>
-            <figure>
-                <img src="desert.jpg" alt="desert" class="imageframe">
-                <figcaption>White Chocolate Shell with lemon mousse and lingonberries</figcaption>
-            </figure>
-        </section>
+        <figure class="image-fig">
+            <img src="exterior.jpg" alt="desert" class="imageframe h400">
+            <figcaption>The facade might be quiet, but the kitchen is already buzzing. See you soon!</figcaption>
+        </figure>
 
         <section>
             <form class="user-form contactform" (ngSubmit)="sendMessage()">
@@ -28,12 +26,34 @@
                     <textarea name="message" [(ngModel)]="message"></textarea>
                 </label>
 
-                <button class="btn submit-message">Send</button>
+                <div><button class="btn submit-message" style="margin-right: 10px">Send</button> <span>{{ apiMessage()}}</span></div>
 
                 <p>* Required field</p>
-
-                <p>{{ apiMessage()}}</p>
             </form>
         </section>
     </div>
+
+            <section class="contact-footer">
+            <div>
+                <h3>Drop By</h3>
+                Pretty Decent <br>
+                Södermannagatan 19, 116 23 Stockholm
+            </div>
+                
+            <div>
+                <h3>Call Us</h3>
+                08-123 45 67
+            </div>
+
+            <div>
+                <h3>Email Us</h3>
+                hello@prettydecent.se
+            </div>
+
+            <div>
+                <h3>Hours of Operation</h3>
+                Tuesday - Saturday 17:00 - 22:00
+            </div>
+        </section>
 </div>
+

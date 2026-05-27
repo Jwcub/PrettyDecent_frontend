@@ -2,3 +2,15 @@
     padding-top: 60px;
     padding-bottom: 60px;
 }
+
+.about-title {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    align-content: center;
+}
+
+.about-title > div {
+    align-self: center;
+}

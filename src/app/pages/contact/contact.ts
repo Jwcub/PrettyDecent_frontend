@@ -23,7 +23,7 @@ export class Contact {
 
   sendMessage():void {
     if( this.name === "" || this.email === "" || this.email === "" || this.message === "") {
-      this.apiMessage.set("Fill in required fields");
+      this.apiMessage.set("Fill in the required fields");
       return;
     }
 

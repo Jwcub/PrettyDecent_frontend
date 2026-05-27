@@ -28,6 +28,22 @@
     border: 1px solid var(--tertiary-color)
 }
 
+.error-message {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    min-height: 100px;
+    width: 80%;
+    max-width: 500px;
+    background-color: var(--white);
+    color: var(--text-dark);
+    padding: var(--space-lg);
+    border: 1px solid var(--tertiary-color);
+    text-align: center;
+}
+
 .reservation {
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -152,7 +168,6 @@
     font-size: var(--smal-text);
     color: var(--muted);
 }
-
 
 .menu-item {
     display: grid;

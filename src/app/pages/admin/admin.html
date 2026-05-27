@@ -115,7 +115,7 @@
     <section class="admin-block show-menu-items">
         <h2>Menu items</h2>
 
-        {{ menuMessage() }}
+        <div class="error-message">{{ menuMessage() }}</div>
 
         @for(item of menuItems(); track item._id ) {
             <div class="menu-item">
