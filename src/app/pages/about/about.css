@@ -31,3 +31,24 @@
     padding-top: 64px;
     padding-bottom: 64px;
 }
+
+@media(max-width: 750px){
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    figure {
+        order: 2;
+    }
+
+    #atmosphere, #community {
+    padding-top: 64px;
+    padding-bottom: 64px;
+    }
+
+    #craft {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+}

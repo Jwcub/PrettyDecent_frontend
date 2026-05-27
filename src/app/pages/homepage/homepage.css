@@ -91,6 +91,14 @@
     gap: 30px;
 }
 
+.vibe figure {
+    cursor: pointer;
+}
+
+.vibe figure:hover {
+    filter: brightness(1.2);
+} 
+
 .imgh500 {
     max-height: 500px;
 }
