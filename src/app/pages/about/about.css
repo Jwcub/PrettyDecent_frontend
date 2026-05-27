@@ -1,16 +1,33 @@
-.about-container {
-    padding-top: 60px;
-    padding-bottom: 60px;
+.about-title {
+    border-bottom: 1px solid #061B0E;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    margin: 0;
 }
 
-.about-title {
+.about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 60px;
-    align-content: center;
+    column-gap: 60px;
 }
 
-.about-title > div {
+.about-grid h2 {
+    font-size: 2rem;
+}
+
+.about-grid .cursive {
+    font-style: italic;
+}
+
+.about-grid .dark-text {
+    color: var(--text-dark);
+}
+
+.about-grid > div {
     align-self: center;
+}
+
+#atmosphere, #craft, #community {
+    padding-top: 64px;
+    padding-bottom: 64px;
 }
