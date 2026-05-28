@@ -19,8 +19,11 @@ import { NgClass } from '@angular/common';
   styleUrl: './admin.css',
 })
 export class Admin {
+  // Editing id for triggering edit-field
+  editingId: string | null = null;
 
-  // Create space for error-messages
+
+  // Feedback and error-messages handling
   errorMessage = signal("");
 
   constructor() {
@@ -35,11 +38,23 @@ export class Admin {
     });
   }
 
-  editingId: string | null = null;
+  // Function for displaying time, time shows in: YYYY-MM-DD, (hh:mm)
+  displayDate(dateObject: Date | undefined): string {
+    if (!dateObject) return "Couldn't read time";
+    const d = new Date(dateObject);
+    const offset = d.getTimezoneOffset() * 60000;
+    const dateTime = new Date(d.getTime() - offset).toISOString();
+    const date = dateTime.slice(0, 10);
+    const time = dateTime.slice(11, 16);
+    return time === "00:00" ? date : `${date}, ${time}`;
+  }
 
+  
   /*
   ** TABLE RESERVATIONS
   */
+
+  // Inject booking-service and get reservations
   bookingService = inject(BookingService);
   reservations = this.bookingService.getReservations();
 
@@ -51,17 +66,6 @@ export class Admin {
       res => new Date(res.date) > today
     );
   });
-
-  // Show time in format YYYY-MM-DD, hh:mm
-  displayDate(dateObject: Date | undefined): string {
-    if (!dateObject) return "Couldn't read time";
-    const d = new Date(dateObject);
-    const offset = d.getTimezoneOffset() * 60000;
-    const dateTime = new Date(d.getTime() - offset).toISOString();
-    const date = dateTime.slice(0, 10);
-    const time = dateTime.slice(11, 16);
-    return time === "00:00" ? date : `${date}, ${time}`;
-  }
 
   // Edit Reservation
   editingReservation: ReservationResponse | null = null; 
@@ -90,20 +94,22 @@ export class Admin {
   this.editingId = null;
   }
 
+
   /*
   ** MESSAGES
   */
+
+  // Inject message-service and get messages
   messageService = inject(MessageService);
   messages = this.messageService.getMessages();
 
+  // Change status on message (PUT)
   changeStatus(message: Message): void {
     if (!message._id) {
       console.error("Could not update message status.");
       this.errorMessage.set("Could not update message status.");
       return; 
     }
-
-    console.log(message);
 
     this.messageService.updateMessageStatus(message._id, message).subscribe({
       next: (res: any) => {
@@ -119,10 +125,12 @@ export class Admin {
   /* 
   ** MENU SERVICES **
   */
+
+  // Inject menu-service create signal for Menu item
   menuService = inject(MenuService)
   menuItems = signal<MenuItemResponse[]>([]);
 
-  // Load menu items upon pageload
+  // Load menu items upon pageload, this because we want to be able to update menu item using ".update".
   ngOnInit(): void {
     this.menuService.getMenuItems().subscribe(items => {
       this.menuItems.set(items);
