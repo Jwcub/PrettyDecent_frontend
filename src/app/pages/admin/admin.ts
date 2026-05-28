@@ -39,15 +39,16 @@ export class Admin {
   }
 
   // Function for displaying time, time shows in: YYYY-MM-DD, (hh:mm)
-  displayDate(dateObject: Date | undefined): string {
-    if (!dateObject) return "Couldn't read time";
-    const d = new Date(dateObject);
-    const offset = d.getTimezoneOffset() * 60000;
-    const dateTime = new Date(d.getTime() - offset).toISOString();
-    const date = dateTime.slice(0, 10);
-    const time = dateTime.slice(11, 16);
-    return time === "00:00" ? date : `${date}, ${time}`;
-  }
+displayDate(dateObject?: Date): string {
+  if (!dateObject) return "Couldn't read time";
+  const d = new Date(dateObject);
+  const date = d.toLocaleDateString("sv-SE");
+  const time = d.toLocaleTimeString("sv-SE", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return time === "00:00" ? date : `${date}, ${time}`;
+}
 
   
   /*
@@ -58,13 +59,21 @@ export class Admin {
   bookingService = inject(BookingService);
   reservations = this.bookingService.getReservations();
 
-  // Hide reservations that have past
+  // Convert time to local time string
+  toDatetimeLocal(dateObject: Date) {
+    const date = new Date(dateObject);
+    const offset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - offset).toISOString().slice(0, 16);
+}
+
+  // Hide reservations that have past and sort by time of reservation
   currentReservations = computed(() => {
     const today = new Date();
+
     today.setHours(0, 0, 0, 0);
     return this.reservations().filter(
       res => new Date(res.date) > today
-    );
+    ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   });
 
   // Edit Reservation
@@ -145,7 +154,6 @@ export class Admin {
     category: "",
     price: 0
   };
-
   addMenuItem(): void {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
@@ -171,6 +179,7 @@ export class Admin {
     this.editingMenuItem = { ...item }; 
   }
   
+  // Save edited menuItem (PUT)
   saveEdit(menuItem: MenuItemResponse): void {
     this.menuService.editMenuItem(menuItem._id, menuItem).subscribe({
       next: (res: any) => {

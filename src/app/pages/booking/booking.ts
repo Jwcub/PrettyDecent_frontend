@@ -36,6 +36,12 @@ export class Booking {
 
     this.bookingService.makeReservation(this.newBooking).subscribe({
       next: (res: ReservationResponse) => {
+        this.message.set("Table reserved!"),
+        this.newBooking.name = "";
+        this.newBooking.phone = "";
+        this.newBooking.date = new Date(0);
+        this.newBooking.guests = 0;
+        this.newBooking.requests = "";
       },
       error: (err) => {
         this.message.set(err.error?.message ?? `Unknown error occured`)

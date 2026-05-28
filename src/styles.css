@@ -156,7 +156,7 @@ input[type="tel"],
 input[type="date"],
 input[type="time"],
 input[type="password"],
-input[type="datetime"],
+input[type="datetime-local"],
 textarea,
 select {
     width: 100%;

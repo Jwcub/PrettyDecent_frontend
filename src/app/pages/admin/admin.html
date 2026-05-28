@@ -9,7 +9,7 @@
                 @if (editingId === reservation._id) {
                     <form class="edit-reservation">
                         <label> Date:
-                            <input type="datetime" [(ngModel)]="reservation.date" name="date" class="edit-field">
+                            <input type="datetime-local" [value]="toDatetimeLocal(reservation.date)" (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
                         </label>
 
                         <label> Guests:
