@@ -1,3 +1,19 @@
+.contact-title {
+    padding-top: 64px;
+    margin: 0;
+}
+
+.title-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 60px;
+    align-items: center;
+}
+
+.title-container figure img {
+    max-height: 400px;
+}
+
 .contact-container {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -43,7 +59,15 @@
     flex: 20%;
 }
 
-@media(max-width: 700px) {
+.contact-footer h3 {
+    font-size: 1.4rem;
+}
+
+@media(max-width: 750px) {
+    .title-container {
+        grid-template-columns: 1fr;
+    }
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: var(--space-xl);

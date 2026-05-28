@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, Signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user';
@@ -19,12 +19,27 @@ import { NgClass } from '@angular/common';
   styleUrl: './admin.css',
 })
 export class Admin {
+
+  // Create space for error-messages
+  errorMessage = signal("");
+
+  constructor() {
+    effect(() => {
+      const message = this.errorMessage();
+    
+      if (message) {
+        setTimeout(() => {
+          this.errorMessage.set("");
+        }, 5000);
+      }
+    });
+  }
+
   editingId: string | null = null;
 
   /*
   ** TABLE RESERVATIONS
   */
-  reservationMessage = signal("");
   bookingService = inject(BookingService);
   reservations = this.bookingService.getReservations();
 
@@ -60,12 +75,12 @@ export class Admin {
   saveUpdatedReservation(reservation: ReservationResponse): void {
     this.bookingService.editReservation(reservation._id, reservation).subscribe({
       next: (res: any) => {
-        this.reservationMessage.set("Reservation has been updated");
+        this.errorMessage.set("Reservation has been updated");
         this.editingId = null;
         console.log('Uppdaterad:', res);
       },
       error: (err: any) => {
-        this.reservationMessage.set(err.error?.message ?? `Could not update reservation ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Could not update reservation ${err.message}`);
       }
     });
   }
@@ -78,14 +93,13 @@ export class Admin {
   /*
   ** MESSAGES
   */
-  messageMessages = signal("");
   messageService = inject(MessageService);
   messages = this.messageService.getMessages();
 
   changeStatus(message: Message): void {
     if (!message._id) {
       console.error("Could not update message status.");
-      this.messageMessages.set("Could not update message status.");
+      this.errorMessage.set("Could not update message status.");
       return; 
     }
 
@@ -93,10 +107,10 @@ export class Admin {
 
     this.messageService.updateMessageStatus(message._id, message).subscribe({
       next: (res: any) => {
-        this.messageMessages.set("Message status has been changed");
+        this.errorMessage.set("Message status has been changed");
       },
       error: (err: any) => {
-        this.messageMessages.set(err.error?.message ?? `Could not update menu item ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
       }
     });
   }
@@ -105,8 +119,6 @@ export class Admin {
   /* 
   ** MENU SERVICES **
   */
-  menuMessage = signal("");
-  addMenuMessage = signal("");
   menuService = inject(MenuService)
   menuItems = signal<MenuItemResponse[]>([]);
 
@@ -130,7 +142,7 @@ export class Admin {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
         this.menuItems.update(currentMenuItems => [...currentMenuItems, res]);
-        this.addMenuMessage.set("New menu item submited to menu");
+        this.errorMessage.set("New menu item submited to menu");
         this.newMenuItem.name = "";
         this.newMenuItem.description = "";
         this.newMenuItem.type = null;
@@ -138,7 +150,7 @@ export class Admin {
         this.newMenuItem.price = 0;
       },
       error: (err) => {
-        this.addMenuMessage.set(err.error?.message ?? `Unknown error occured`)
+        this.errorMessage.set(err.error?.message ?? `Unknown error occured`)
       }
     });
   };
@@ -154,11 +166,11 @@ export class Admin {
   saveEdit(menuItem: MenuItemResponse): void {
     this.menuService.editMenuItem(menuItem._id, menuItem).subscribe({
       next: (res: any) => {
-        this.menuMessage.set("Menu item has been updated");
+        this.errorMessage.set("Menu item has been updated");
         this.editingId = null;
       },
       error: (err: any) => {
-        this.menuMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
       }
     });
   }
@@ -168,11 +180,11 @@ export class Admin {
     this.menuService.removeMenuItem(item._id).subscribe({
       next: (res: any) => {
         this.menuItems.update(items => items.filter(i => i._id !== item._id));
-        this.menuMessage.set("Menu item has been removed");
+        this.errorMessage.set("Menu item has been removed");
 
       },
       error: (err: any) => {
-        this.menuMessage.set(err.error?.message ?? `Something went wrong, menu item wasn't removed`);
+        this.errorMessage.set(err.error?.message ?? `Something went wrong, menu item wasn't removed`);
       }
     });
   }
@@ -181,7 +193,6 @@ export class Admin {
   ** ADD NEW USER
   */
 
-  userMessage = signal("");
   authService = inject(AuthService);
 
   newUser: User = {
@@ -199,9 +210,9 @@ export class Admin {
       next: (res: RegisterResponse) => {
         this.newUser.email = "";
         this.newUser.password = "";
-        this.userMessage.set(res.message);
+        this.errorMessage.set(res.message);
       }, 
-      error: (err) => this.userMessage.set(err.error.error)
+      error: (err) => this.errorMessage.set(err.error.error)
     });
   }
 }

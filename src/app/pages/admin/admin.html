@@ -4,7 +4,6 @@
 
     <section class="show-bookings admin-block">
         <h2>Reservations</h2>
-        {{ reservationMessage() }}
         @for(reservation of currentReservations(); track reservation._id) {
             <article class="reservation">
                 @if (editingId === reservation._id) {
@@ -115,7 +114,9 @@
     <section class="admin-block show-menu-items">
         <h2>Menu items</h2>
 
-        <div class="error-message">{{ menuMessage() }}</div>
+        @if (errorMessage()) {
+            <div class="error-message">{{ errorMessage() }}</div>
+        }
 
         @for(item of menuItems(); track item._id ) {
             <div class="menu-item">
@@ -217,18 +218,12 @@
 
             <button class="btn">Add</button>
         </form>
-
-        <p>{{ addMenuMessage() }}</p>
-
     </section>
 
 
     <section class="admin-block add-account">
         <h2>Add new account</h2>
         <form (ngSubmit)="register()">
-            <div>
-                {{ userMessage() }}
-            </div>
             <label>Email:
                 <input type="email" id="email" name="email" [(ngModel)]="newUser.email">
             </label>

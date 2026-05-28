@@ -30,18 +30,20 @@
 
 .error-message {
     position: fixed;
-    top: 50px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
     min-height: 100px;
     width: 80%;
     max-width: 500px;
-    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
     color: var(--text-dark);
     padding: var(--space-lg);
     border: 1px solid var(--tertiary-color);
-    text-align: center;
 }
 
 .reservation {
