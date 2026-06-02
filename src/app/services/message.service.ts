@@ -10,7 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class MessageService {
   private http = inject(HttpClient);
-  url: string = "http://localhost:5500/api/message";
+  url: string = "https://prettydecent-backend.onrender.com/api/message";
 
   sendMessage(message: Message): Observable<MessageResponse> {
     return this.http.post<Message>(this.url, message);

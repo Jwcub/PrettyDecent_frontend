@@ -11,7 +11,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class BookingService {
 
   private http = inject(HttpClient);
-  url: string = "http://localhost:5500/api/reservation";
+  url: string = "https://prettydecent-backend.onrender.com/api/reservation";
 
     // Get menu items
    getReservations(): Signal<ReservationResponse[]> {

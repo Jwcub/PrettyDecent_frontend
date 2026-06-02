@@ -11,7 +11,7 @@ import { RemoveResponse } from '../models/remove-response';
 })
 export class MenuService {
   private http = inject(HttpClient);
-  url: string = "http://localhost:5500/api/menu";
+  url: string = "https://prettydecent-backend.onrender.com/api/menu";
 
   // Get menu items
  getMenuItems(): Observable<MenuItemResponse[]> {

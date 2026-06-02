@@ -13,7 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  url: string = "http://localhost:5500/api";
+  url: string = "https://prettydecent-backend.onrender.com/api";
 
   token = signal(localStorage.getItem("userToken") || '');
   isLoggedIn = computed(() => this.token());
