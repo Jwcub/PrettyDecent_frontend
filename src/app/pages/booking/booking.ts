@@ -27,7 +27,7 @@ export class Booking {
 
   bookTable():void {
     if (!this.dateInput || !this.timeInput) {
-      this.message.set("Please enter date and/or time")
+      this.message.set("Ange datum och/eller tid")
       return;
     }
 
@@ -36,7 +36,7 @@ export class Booking {
 
     this.bookingService.makeReservation(this.newBooking).subscribe({
       next: (res: ReservationResponse) => {
-        this.message.set("Table reserved!"),
+        this.message.set("Bord reserverat"),
         this.newBooking.name = "";
         this.newBooking.phone = "";
         this.newBooking.date = new Date(0);
@@ -44,7 +44,7 @@ export class Booking {
         this.newBooking.requests = "";
       },
       error: (err) => {
-        this.message.set(err.error?.message ?? `Unknown error occured`)
+        this.message.set(err.error?.message ?? `Okänt fel`)
       }
     });
   }

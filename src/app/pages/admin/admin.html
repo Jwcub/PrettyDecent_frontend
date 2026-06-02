@@ -1,58 +1,58 @@
 <div class="container admin-container">
 
-    <h1>Welcome Administrator!</h1>
+    <h1>Välommen administratör!</h1>
 
     <section class="show-bookings admin-block">
-        <h2>Reservations</h2>
+        <h2>Reservationer</h2>
         @for(reservation of currentReservations(); track reservation._id) {
             <article class="reservation">
                 @if (editingId === reservation._id) {
                     <form class="edit-reservation">
-                        <label> Date:
+                        <label> Datum:
                             <input type="datetime-local" [value]="toDatetimeLocal(reservation.date)" (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
                         </label>
 
-                        <label> Guests:
+                        <label> Gäster:
                             <input type="number" [(ngModel)]="reservation.guests" name="guests" class="edit-field">
                         </label>
 
-                        <label> Name:
+                        <label> Namn:
                             <input type="text" [(ngModel)]="reservation.name" name="name" class="edit-field">
                         </label>
 
-                        <label> Requests:
+                        <label> Särskilda önskemål:
                             <textarea [(ngModel)]="reservation.requests" name="requests" class="edit-field"></textarea>
                         </label>
 
                         <label>Status:
                             <select [(ngModel)]="reservation.status" name="status" class="edit-field">
-                                <option value="newBooking">New</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="cancelled">Cancelled</option>
+                                <option value="newBooking">Ny bokning</option>
+                                <option value="confirmed">Bekräftad</option>
+                                <option value="cancelled">Avbokad</option>
                             </select>
                         </label>
 
                         <div class="edit-reservation-buttons">
-                            <button (click)="saveUpdatedReservation(reservation)" class="btn">Uppdate</button>
-                            <button (click)="cancelEdit()" class="secondary-btn">Cancel</button>
+                            <button (click)="saveUpdatedReservation(reservation)" class="btn">Uppdatera</button>
+                            <button (click)="cancelEdit()" class="secondary-btn">Avbryt</button>
                         </div>
                         
                     </form>
                 } @else {
                 <div class="res-block res-date">
-                    <span class="res-label">Date</span>
+                    <span class="res-label">Datum</span>
                     <span>{{ displayDate(reservation.date) }}</span>
                 </div>
                 <div class="res-block res-guests">
-                    <span class="res-label">Guests</span>
+                    <span class="res-label">Gäster</span>
                     <span>{{ reservation.guests }}</span>
                 </div>
                 <div class="res-block res-name">
-                    <span class="res-label">Name</span>
+                    <span class="res-label">Namn</span>
                     <span>{{ reservation.name }}</span>
                 </div>
                 <div class="res-block res-requests">
-                    <span class="res-label">Requests</span>
+                    <span class="res-label">Särskilda önskemål</span>
                     <span> 
                         @if(reservation.requests === "") {
                             -
@@ -65,19 +65,19 @@
                     <span class="res-label">Status</span>
                     <div>
                         @if(reservation.status === "newBooking"){
-                            <span class="res-status-block res-new">New</span>
+                            <span class="res-status-block res-new">Ny bokning</span>
 
                         }@if(reservation.status === "confirmed"){
-                            <span class="res-status-block res-confirmed">Confirmed</span>
+                            <span class="res-status-block res-confirmed">Bekräftad</span>
 
                         } @if(reservation.status === "cancelled"){
-                            <span class="res-status-block res-cancelled">Cancelled</span>
+                            <span class="res-status-block res-cancelled">Avbokad</span>
                         }
                     
                     </div>
                 </div>
                 <div class="res-block res-tools">
-                    <button (click)="editReservation(reservation)" class="btn res-edit"><span class="material-icons res-edit-icon">edit</span>Edit</button>
+                    <button (click)="editReservation(reservation)" class="btn res-edit"><span class="material-icons res-edit-icon">edit</span>Ändra</button>
                 </div>
                 }
             </article>
@@ -86,7 +86,7 @@
     </section>
 
     <section class="show-messages admin-block">
-        <h2>Messages</h2>
+        <h2>Meddelanden</h2>
         @for(message of messages(); track message._id) {
             <article class="message">
                 <div class="message-title"><h3>{{ message.title }}</h3> 
@@ -95,15 +95,15 @@
                             'message-status_new': message.status === 'new',
                             'message-status_answered': message.status === 'answered',
                             'message-status_pending': message.status === 'pending' }">>
-                            <option value="new">New</option>
-                            <option value="answered">Answered</option>
-                            <option value="pending">Pending</option>
+                            <option value="new">Nytt meddelande</option>
+                            <option value="answered">Besvarad</option>
+                            <option value="pending">Behandlas</option>
                         </select>
                     </div>
                 </div>
-                <div class="message-timestamp"> <span class="message-label">Recieved:</span> {{displayDate(message.created) || null }}</div>
-                <div class="message-sender"> <span class="message-label">From:</span> {{ message.name }}, {{ message.email }}</div>
-                <div class="message-message"><span class="message-label">Message:</span> <br> {{ message.message }}</div>
+                <div class="message-timestamp"> <span class="message-label">Togs emot:</span> {{displayDate(message.created) || null }}</div>
+                <div class="message-sender"> <span class="message-label">Från:</span> {{ message.name }}, {{ message.email }}</div>
+                <div class="message-message"><span class="message-label">Meddelande:</span> <br> {{ message.message }}</div>
                 
             </article>
         }
@@ -112,7 +112,7 @@
 
     <!-- Show and edit menu items -->
     <section class="admin-block show-menu-items">
-        <h2>Menu items</h2>
+        <h2>Meny</h2>
 
         @if (errorMessage()) {
             <div class="error-message">{{ errorMessage() }}</div>
@@ -128,27 +128,27 @@
                 <input type="number" [(ngModel)]="item.price" class="edit-field">
 
                 <select [(ngModel)]="item.type" name="type" class="edit-field">
-                    <option [value]="null" disabled selected>-- Choose type --</option>
-                    <option value="food">Food</option>
-                    <option value="drink">Drink</option>
+                    <option [value]="null" disabled selected>-- Välj typ --</option>
+                    <option value="food">Mat</option>
+                    <option value="drink">Dryck</option>
                  </select>
 
                 @if(item.type === 'food') {
                 <select [(ngModel)]="item.category" name="category" class="edit-field">
-                    <option value="appetizer">Appetizer</option>
-                    <option value="main">Main course</option>
-                    <option value="dessert">Dessert</option>
+                    <option value="appetizer">Förrätt</option>
+                    <option value="main">Huvudrätt</option>
+                    <option value="dessert">Efterrätt</option>
                 </select>
                 }@else {
                 <select [(ngModel)]="item.category" name="category" class="edit-field">
-                    <option value="wine">Wine</option>
-                    <option value="otherdrink">Other drink</option>
+                    <option value="wine">Vin</option>
+                    <option value="otherdrink">Övrig dryck</option>
                 </select>
                 }
 
                 <select [(ngModel)]="item.display" name="display" class="edit-field">
-                    <option [ngValue]="true">Show</option>
-                    <option [ngValue]="false">Hide</option>
+                    <option [ngValue]="true">Visa</option>
+                    <option [ngValue]="false">Göm</option>
 
                 </select>
 
@@ -162,18 +162,29 @@
                 <div class="menu-item-description"><p>{{ item.description }}</p></div>
                 <div class="menu-item-tools">
                     <div>
-                        <span>{{ item.type }}</span> 
-                        <span>{{ item.category }}</span> 
+                        <span>
+                            @if(item.type === 'food') { mat }
+                            @else if(item.type === 'drink') { dryck }
+                            @else { odefinierad }
+                        </span> 
+                        <span>
+                            @if(item.category === 'appetizer') { förrätt }
+                            @else if(item.category === 'main') { huvudrätt }
+                            @else if(item.category === 'dessert') { efterrätt }
+                            @else if(item.category === 'wine') { vin }
+                            @else if(item.category === 'otherdrink') { Övrig dryck }
+                            @else { odefinierad }
+                        </span>
                     
                         @if(item.display === true) {
-                            <span>Show</span>
+                            <span>Visas</span>
                         }@else {
-                            <span>hide</span>
+                            <span>Dold</span>
                         }
                     </div>
                     <div>
-                        <span class="editbtn" (click)="startEdit(item)">Edit</span>
-                        <span class="editbtn" (click)="removeItem(item)">Remove</span>
+                        <span class="editbtn" (click)="startEdit(item)">Ändra</span>
+                        <span class="editbtn" (click)="removeItem(item)">Radera</span>
                     </div>
                 </div>
             }
@@ -183,56 +194,56 @@
 
    <!-- Add menu item -->
     <section class="admin-block add-menu-item">
-        <h2>Add to menu</h2>
+        <h2>Lägg till i menyn</h2>
         <form class="post-menu-item" (ngSubmit)="addMenuItem()">
-            <label>Name
+            <label>Namn
                 <input type="text" name="name" [(ngModel)]="newMenuItem.name">
             </label>
 
-            <label>Description
+            <label>Beskrivning
                 <input type="text" name="description" [(ngModel)]="newMenuItem.description">
             </label>
 
             <select [(ngModel)]="newMenuItem.type" name="type">
-                <option [value]="null" disabled selected>-- Choose type --</option>
-                <option value="food">Food</option>
-                <option value="drink">Drink</option>
+                <option [value]="null" disabled selected>-- Välj typ --</option>
+                <option value="food">Mat</option>
+                <option value="drink">Dryck</option>
             </select>
             
-            <label>Category
+            <label>Kategori
                 <select [(ngModel)]="newMenuItem.category" name="category">
                     @if(newMenuItem.type === 'food') {
-                    <option value="appetizer">Appetizer</option>
-                    <option value="main">Main course</option>
-                    <option value="dessert">Dessert</option>
+                    <option value="appetizer">Förrätt</option>
+                    <option value="main">Huvudrätt</option>
+                    <option value="dessert">Efterrätt</option>
                     } @else {
-                    <option value="wine">Wine</option>
-                    <option value="otherdrink">Other drink</option>
+                    <option value="wine">Vin</option>
+                    <option value="otherdrink">Annan dryck</option>
                     }
                 </select>
             </label>
     
-            <label>Price
+            <label>Pris
                 <input type="number" name="price" [(ngModel)]="newMenuItem.price">
             </label>
 
-            <button class="btn">Add</button>
+            <button class="btn">Lägg till</button>
         </form>
     </section>
 
 
     <section class="admin-block add-account">
-        <h2>Add new account</h2>
+        <h2>Lägg till konto</h2>
         <form (ngSubmit)="register()">
-            <label>Email:
+            <label>E-post:
                 <input type="email" id="email" name="email" [(ngModel)]="newUser.email">
             </label>
 
-            <label>Password:
+            <label>Lössenord:
                 <input type="password" id="password" name="password" [(ngModel)]="newUser.password">
             </label>
 
-            <button class="btn">Register account</button>
+            <button class="btn">Registera användare</button>
 
         </form>
     </section>

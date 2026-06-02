@@ -23,7 +23,7 @@ export class Contact {
 
   sendMessage():void {
     if( this.name === "" || this.email === "" || this.email === "" || this.message === "") {
-      this.apiMessage.set("Fill in the required fields");
+      this.apiMessage.set("Fyll i alla nödvändiga fält");
       return;
     }
 
@@ -37,7 +37,7 @@ export class Contact {
     this.messageService.sendMessage(message).subscribe({
       next: (res: MessageResponse) => this.apiMessage.set(res.message),
       error: (err) => {
-        this.apiMessage.set(err.error?.message ?? `Unknown error...`)
+        this.apiMessage.set(err.error?.message ?? `Okänt fel`)
       }
     });
   }

@@ -1,17 +1,17 @@
 <div class="container login-container">
-    <h1>Login</h1>
-    <p>This is an internal workspace for the hands that shape the night. Here, menus are locked into place and tables are arranged before the first guest arrives.</p>
+    <h1>Logga in</h1>
+    <p>Det här är ett internt arbetsverktyg för personalen. Här uppdateras menyer och bordsplaceringar inför kvällens service.</p>
 
     <form class="login" (ngSubmit)="login()">
-        <label>Email
+        <label>E-post
             <input type="email" name="email" [(ngModel)]="email">
         </label>
 
-        <label>Password
+        <label>Lösenord
                 <input type="password" name="password" [(ngModel)]="password">
         </label>
 
-        <button class="btn">Log in</button>
+        <button class="btn">Logga in</button>
 
         <div>
             {{ message() }}

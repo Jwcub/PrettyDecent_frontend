@@ -27,7 +27,7 @@ export class Login {
     }
 
     if(!this.email || !this.password){
-      this.message.set("Please fill in email and password");
+      this.message.set("Fyll i e-postadress och lösenord");
       return
     }
 
@@ -35,7 +35,7 @@ export class Login {
       next: () => {
         this.router.navigate(['/admin'])
       },
-      error: () => this.message.set("Incorrect user credetials")
+      error: () => this.message.set("Felaktiga inloggningsuppgifter")
     })
   }
   

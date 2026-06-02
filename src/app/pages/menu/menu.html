@@ -1,13 +1,13 @@
 <div class="container menu-container">
     <div class="menu-title">
-        <p class="menu-title_open">Tuesday - Saturday</p>
-        <h1>The Daily Menu</h1>
+        <p class="menu-title_open">Tisdag - Söndag</p>
+        <h1>Dagens meny</h1>
         <p class="menu-title_location">Pretty Decent •  Södermalm</p>
     </div>
 
     <div class="menu">
         <section class="menu-section">
-            <h2>Appetizers</h2>
+            <h2>Förrätter</h2>
 
             @for(appetizer of appetizers(); track appetizer._id) {
                 <article class="menu-item">
@@ -20,7 +20,7 @@
         </section>
 
         <section class="menu-section">
-            <h2>Main courses</h2>
+            <h2>Huvudrätter</h2>
 
             @for(mainCourse of mainCourses(); track mainCourse._id) {
                 <article class="menu-item">
@@ -33,7 +33,7 @@
         </section>
 
         <section class="menu-section">
-            <h2>Deserts</h2>
+            <h2>Efterrätter</h2>
             
             @for(dessert of desserts(); track dessert._id) {
                 <article class="menu-item">
@@ -46,11 +46,11 @@
         </section>
 
         <div class="col2">
-            <img src="food.png" alt="Fish dish" class="imageframe">
+            <img src="food.png" alt="Fiskrätt" class="imageframe">
         </div>
 
         <section class="menu-section">
-            <h2>Wines</h2>
+            <h2>Viner</h2>
 
             @for(wine of wines(); track wine._id) {
                 <article class="menu-item">
@@ -62,7 +62,7 @@
         </section>
 
         <section class="menu-section">
-            <h2>Other drinks</h2>
+            <h2>Övrig dryck</h2>
 
             @for(otherDrink of otherDrinks(); track otherDrink._id) {
                 <article class="menu-item">

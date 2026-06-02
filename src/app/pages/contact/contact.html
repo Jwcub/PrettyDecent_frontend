@@ -1,12 +1,12 @@
 <section class="contact-title">
     <div class="container title-container">
         <div>
-            <h1>Let’s Connect</h1>
-            <p>We’d love to hear from you! Whether you have a question about our menu, want to book a large event, or just want to say hello, feel free to reach out.</p>
+            <h1>Kom i kontakt</h1>
+            <p>Hör gärna av dig! Oavsett om du har frågor om menyn, vill boka ett större sällskap eller bara vill säga hej, är det bara att höra av sig.</p>
         </div>
         <figure>
             <img src="waiter.jpg" alt="Dish from april 2026" class="imageframe">
-            <figcaption>Let us know if there's anything we can do for you!</figcaption>
+            <figcaption>Hör av dig om det är något vi kan göra för dig!</figcaption>
         </figure>
     </div>
 </section>
@@ -15,54 +15,54 @@
     <div class="contact-grid">
         <figure class="image-fig">
             <img src="exterior.jpg" alt="desert" class="imageframe h400">
-            <figcaption>The facade might be quiet, but the kitchen is already buzzing. See you soon!</figcaption>
+            <figcaption>Gatan kanske är tom, men i köket är det redan full fart. Vi ses snart</figcaption>
         </figure>
 
         <section>
             <form class="user-form contactform" (ngSubmit)="sendMessage()">
-                <label>Name *
+                <label>Namn*
                     <input required minlength="3" type="text" name="name" [(ngModel)]="name">
                 </label>
 
-                <label>Email *
+                <label>E-post*
                     <input required minlength="10" type="email" name="email" [(ngModel)]="email">
                 </label>
 
-                <label>Title *
+                <label>Titel*
                     <input type="text" name="title" [(ngModel)]="title">
                 </label>
 
-                <label>Message *
+                <label>Meddelande*
                     <textarea name="message" [(ngModel)]="message"></textarea>
                 </label>
 
-                <div><button class="btn submit-message" style="margin-right: 10px">Send</button> <span>{{ apiMessage()}}</span></div>
+                <div><button class="btn submit-message" style="margin-right: 10px">Skicka</button> <span>{{ apiMessage()}}</span></div>
 
-                <p>* Required field</p>
+                <p>*Nödvändiga fält</p>
             </form>
         </section>
     </div>
 
             <section class="contact-footer">
             <div>
-                <h3>Drop By</h3>
+                <h3>Kom förbi</h3>
                 Pretty Decent <br>
                 Södermannagatan 19, 116 23 Stockholm
             </div>
                 
             <div>
-                <h3>Call Us</h3>
+                <h3>Ring oss</h3>
                 08-123 45 67
             </div>
 
             <div>
-                <h3>Email Us</h3>
-                hello@prettydecent.se
+                <h3>Mejla oss</h3>
+                hej@prettydecent.se
             </div>
 
             <div>
-                <h3>Hours of Operation</h3>
-                Tuesday - Saturday <br>
+                <h3>Öppettider</h3>
+                Tisdag - Söndag <br>
                 17:00 - 22:00
             </div>
         </section>

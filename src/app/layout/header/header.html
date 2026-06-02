@@ -2,11 +2,11 @@
   <div class="container header-container">
     <div class="logo-area">
         <a routerLink="/" class="logo-link">
-        <img src="prettyDecentLogo.svg" alt="Pretty Decent" class="logo-img">
+          <img src="prettyDecentLogo.svg" alt="Pretty Decent logotyp" class="logo-img">
         </a>
     </div>
 
-    <button class="hamburger-btn" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Open menu">
+    <button class="hamburger-btn" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Öppen meny">
       <span class="hamburger-bar"></span>
       <span class="hamburger-bar"></span>
       <span class="hamburger-bar"></span>
@@ -14,15 +14,15 @@
 
     <nav class="main-nav" [class.open]="isMenuOpen">
       <ul>
-        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}" (click)="isMenuOpen = false">Home</a></li>
-        <li><a routerLink="/menu" routerLinkActive="active" (click)="isMenuOpen = false">Menu</a></li>
-        <li><a routerLink="/about" routerLinkActive="active" (click)="isMenuOpen = false">About</a></li>
-        <li><a routerLink="/contact" routerLinkActive="active" (click)="isMenuOpen = false">Contact</a></li>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}" (click)="isMenuOpen = false">Hem</a></li>
+        <li><a routerLink="/menu" routerLinkActive="active" (click)="isMenuOpen = false">Meny</a></li>
+        <li><a routerLink="/about" routerLinkActive="active" (click)="isMenuOpen = false">Om oss</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" (click)="isMenuOpen = false">Kontakt</a></li>
         @if(authService.isLoggedIn()) {
           <li class="mobile-only"><button class="btn book-table" routerLink="/admin">Admin</button></li>
-          <li class="mobile-only"> <button class="secondary-btn book-table" (click)="logout()">Logout</button></li>
+          <li class="mobile-only"> <button class="secondary-btn book-table" (click)="logout()">Logga ut</button></li>
         }@else {
-        <li class="mobile-only"><button class="btn book-table" routerLink="/booking" (click)="isMenuOpen = false">Book table</button></li>
+        <li class="mobile-only"><button class="btn book-table" routerLink="/booking" (click)="isMenuOpen = false">Boka bord</button></li>
         }
       </ul>
     </nav>
@@ -31,9 +31,9 @@
       @if(authService.isLoggedIn()) {
         <button class="btn book-table" routerLink="/admin">Admin</button>
 
-        <button class="btn logout-btn" (click)="logout()">Logout</button>
+        <button class="btn logout-btn" (click)="logout()">Logga ut</button>
       } @else {
-        <button class="btn book-table" routerLink="/booking">Book a table</button>
+        <button class="btn book-table" routerLink="/booking">Boka bord</button>
       }
 
     </div>
