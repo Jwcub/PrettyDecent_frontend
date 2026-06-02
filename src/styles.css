@@ -281,3 +281,13 @@ figcaption.border-caption {
     padding-right: var(--space-lg);
 }
 
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktop-only {
+    display: inline;
+  }
+}
+
