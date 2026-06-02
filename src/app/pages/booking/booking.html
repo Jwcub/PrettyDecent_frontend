@@ -1,45 +1,45 @@
 <div class="container booking-container">
-    <h1>Book a table</h1>
-    <p>Our tables are few, because deep conversations require space. Reserve your place in tonight’s story, and let us prepare a night of honest food, shared thoughts, and the beautiful unpredictability of a well-lived evening.</p>
+    <h1>Boka bord</h1>
+    <p>Vi har medvetet få bord, eftersom bra samtal kräver utrymme. Boka din plats för kvällen och låt oss ta hand om resten med god mat, rätter att dela och den där sköna, oplanerade stämningen.</p>
 
     <form class="user-form booking" (ngSubmit)="bookTable()">
-        <h2>Reservation details</h2>
+        <h2>Reservationsdetaljer</h2>
         <div class="booking-twocol">
-            <label class="half">Date
+            <label class="half">Datum
                 <input type="date" name="formDate" [(ngModel)]="dateInput">
             </label>
 
-            <label class="half">Time
+            <label class="half">Tid
                 <input type="time" name="formTime" [(ngModel)]="timeInput">
             </label>
         </div>
 
         <div>
-            <label>Number of guests
+            <label>Antal gäster
                 <input type="number" placeholder="2" name="guests" [(ngModel)]="newBooking.guests">
             </label>
         </div>
 
         <div class="booking-twocol">
-            <label class="half">Full name
-                <input type="text" placeholder="Firstname Lastname" name="name" [(ngModel)]="newBooking.name">
+            <label class="half">Namn
+                <input type="text" placeholder="För och efternamn" name="name" [(ngModel)]="newBooking.name">
             </label>
 
-            <label class="half">Phone
+            <label class="half">Telefonnummer
                 <input type="tel" placeholder="+46 70 - 00 00 000" name="phone" [(ngModel)]="newBooking.phone">
             </label>
         </div>
 
         <div>
-            <label>Special requests
-                <textarea name="request" placeholder="Allergies or celebratory notes..." [(ngModel)]="newBooking.requests">A</textarea>
+            <label>Särskilda önskemål
+                <textarea name="request" placeholder="Allergies or celebratory notes..." [(ngModel)]="newBooking.requests">Ange t.ex. om någon i sällskapet har en allergi, eller om någon fyller år.</textarea>
             </label>
         </div>
 
-        <button class="btn confirm-booking">Confirm request</button>
+        <button class="btn confirm-booking">Bekräfta bokning</button>
         <p>{{ message()}}</p>
 
-        <p class="booking-info">Reservations are held for 15 minutes. Cancellations must be made 24 hours in advance.</p>
+        <p class="booking-info">Bordet hålls i 15 minuter. Avbokning måste ske senast 24 timmar innan.</p>
 
     </form>
 </div>
