@@ -45,7 +45,7 @@ export class Admin {
   bookingService = inject(BookingService);
   reservations = this.bookingService.getReservations();
 
-// Function to display time
+// Function to display time in format ("2026-06-04, 13:37")
   displayDateTime(isoString: string): string {
     if (!isoString) return '';
 
@@ -55,23 +55,17 @@ export class Admin {
     return `${datePart}, ${timePart}`;
   }
 
-  // Convert time to local time string
-  toDatetimeLocal(dateObject: Date) {
-    const date = new Date(dateObject);
-    const offset = date.getTimezoneOffset() * 60000;
-    return new Date(date.getTime() + offset).toISOString().slice(0, 16);
-}
-
-  // Hide reservations that have past and sort by time of reservation
+  // Hide reservations that have past and sort by time (soon ->)
   currentReservations = computed(() => {
     const today = new Date();
 
     today.setHours(0, 0, 0, 0);
     return this.reservations().filter(res => {
       if (!res.date) return false;
-      new Date(res.date) > today
 
+      new Date(res.date) > today
       return new Date(res.date) >= today;
+
     }).sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
@@ -89,12 +83,12 @@ export class Admin {
   saveUpdatedReservation(reservation: ReservationResponse): void {
     this.bookingService.editReservation(reservation._id, reservation).subscribe({
       next: (res: any) => {
-        this.errorMessage.set("Reservation has been updated");
+        this.errorMessage.set("Reservationen har uppdaterats");
         this.editingId = null;
         console.log('Uppdaterad:', res);
       },
       error: (err: any) => {
-        this.errorMessage.set(err.error?.message ?? `Could not update reservation ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Kunde inte uppdaterad reservationen ${err.message}`);
       }
     });
   }
@@ -126,8 +120,8 @@ export class Admin {
   // Change status on message (PUT)
   changeStatus(message: Message): void {
     if (!message._id) {
-      console.error("Could not update message status.");
-      this.errorMessage.set("Kunde inte uppdatera meddelande.");
+      console.error("Kunde inte uppdatera meddelandet.");
+      this.errorMessage.set("Kunde inte uppdatera meddelandet.");
       return; 
     }
 
@@ -165,6 +159,7 @@ export class Admin {
     category: "",
     price: 0
   };
+  
   addMenuItem(): void {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
