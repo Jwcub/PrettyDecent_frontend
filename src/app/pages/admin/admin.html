@@ -15,7 +15,7 @@
                 @if (editingId === reservation._id) {
                     <form class="edit-reservation">
                         <label> Datum:
-                            <input type="datetime-local" [value]="reservation.date ? reservation.date.slice(0, 16) : ''"  (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
+                            <input type="datetime-local" [value]="formatForInput(reservation.date)"  (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
                         </label>
 
                         <label> Gäster:

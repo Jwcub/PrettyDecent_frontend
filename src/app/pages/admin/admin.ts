@@ -55,6 +55,11 @@ export class Admin {
     return `${datePart}, ${timePart}`;
   }
 
+  formatForInput(isoString: string): string {
+    if (!isoString) return '';
+    return isoString.slice(0, 16); 
+  }
+
   // Hide reservations that have past and sort by time (soon ->)
   currentReservations = computed(() => {
     const today = new Date();
