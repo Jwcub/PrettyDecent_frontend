@@ -2,8 +2,14 @@
 
     <h1>Välommen administratör!</h1>
 
+    <!-- Table reservations -->
     <section class="show-bookings admin-block">
         <h2>Reservationer</h2>
+
+        @if(currentReservations().length === 0) {
+            Inga reservationer att visa
+        }
+
         @for(reservation of currentReservations(); track reservation._id) {
             <article class="reservation">
                 @if (editingId === reservation._id) {
@@ -82,9 +88,9 @@
                 }
             </article>
         }
-
     </section>
 
+    <!-- Messages -->
     <section class="show-messages admin-block">
         <h2>Meddelanden</h2>
         @for(message of messages(); track message._id) {
@@ -232,6 +238,7 @@
     </section>
 
 
+    <!-- Add account -->
     <section class="admin-block add-account">
         <h2>Lägg till konto</h2>
         <form (ngSubmit)="register()">
