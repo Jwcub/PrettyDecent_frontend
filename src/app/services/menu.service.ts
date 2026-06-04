@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, Signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MenuItem } from '../models/menu';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { MenuItemResponse } from '../models/menu-response';
 import { RemoveResponse } from '../models/remove-response';

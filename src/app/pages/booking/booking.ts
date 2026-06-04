@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { BookingService } from '../../services/booking.service';
-import { Reservation } from '../../models/reservation';
 import { ReservationResponse } from '../../models/reservation-response';
 import { FormsModule } from '@angular/forms';
 
@@ -20,7 +19,7 @@ export class Booking {
   newBooking = {
     name: "",
     phone: "",
-    date: new Date(),
+    date: "",
     guests:  0,
     requests: ""
   }
@@ -31,15 +30,16 @@ export class Booking {
       return;
     }
 
+    // Convert local time to UTC
     const dateTimeString = `${this.dateInput}T${this.timeInput}`;
-    this.newBooking.date = new Date(dateTimeString);;
+    this.newBooking.date = dateTimeString;
 
     this.bookingService.makeReservation(this.newBooking).subscribe({
       next: (res: ReservationResponse) => {
         this.message.set("Bord reserverat"),
         this.newBooking.name = "";
         this.newBooking.phone = "";
-        this.newBooking.date = new Date(0);
+        this.newBooking.date = "";
         this.newBooking.guests = 0;
         this.newBooking.requests = "";
       },

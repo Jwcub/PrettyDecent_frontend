@@ -5,10 +5,13 @@
         <p class="menu-title_location">Pretty Decent •  Södermalm</p>
     </div>
 
+    @if(isLoading()) {
+        <p><strong>Laddar meny, vänligen vänta...</strong></p>
+    }
+
     <div class="menu">
         <section class="menu-section">
             <h2>Förrätter</h2>
-
             @for(appetizer of appetizers(); track appetizer._id) {
                 <article class="menu-item">
                     <h3 class="menu-item_title">{{ appetizer.name }}</h3>

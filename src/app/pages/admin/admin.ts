@@ -22,7 +22,6 @@ export class Admin {
   // Editing id for triggering edit-field
   editingId: string | null = null;
 
-
   // Feedback and error-messages handling
   errorMessage = signal("");
 
@@ -37,19 +36,6 @@ export class Admin {
       }
     });
   }
-
-  // Function for displaying time, time shows in: YYYY-MM-DD, (hh:mm)
-displayDate(dateObject?: Date): string {
-  if (!dateObject) return "Couldn't read time";
-  const d = new Date(dateObject);
-  const date = d.toLocaleDateString("sv-SE");
-  const time = d.toLocaleTimeString("sv-SE", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  return time === "00:00" ? date : `${date}, ${time}`;
-}
-
   
   /*
   ** TABLE RESERVATIONS
@@ -59,11 +45,21 @@ displayDate(dateObject?: Date): string {
   bookingService = inject(BookingService);
   reservations = this.bookingService.getReservations();
 
+// Function to display time
+  displayDateTime(isoString: string): string {
+    if (!isoString) return '';
+
+    const datePart = isoString.slice(0, 10);
+    const timePart = isoString.slice(11, 16);
+
+    return `${datePart}, ${timePart}`;
+  }
+
   // Convert time to local time string
   toDatetimeLocal(dateObject: Date) {
     const date = new Date(dateObject);
     const offset = date.getTimezoneOffset() * 60000;
-    return new Date(date.getTime() - offset).toISOString().slice(0, 16);
+    return new Date(date.getTime() + offset).toISOString().slice(0, 16);
 }
 
   // Hide reservations that have past and sort by time of reservation
@@ -71,10 +67,15 @@ displayDate(dateObject?: Date): string {
     const today = new Date();
 
     today.setHours(0, 0, 0, 0);
-    return this.reservations().filter(
-      res => new Date(res.date) > today
-    ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return this.reservations().filter(res => {
+      if (!res.date) return false;
+      new Date(res.date) > today
+
+      return new Date(res.date) >= today;
+    }).sort((a, b) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
+});
 
   // Edit Reservation
   editingReservation: ReservationResponse | null = null; 
@@ -111,6 +112,16 @@ displayDate(dateObject?: Date): string {
   // Inject message-service and get messages
   messageService = inject(MessageService);
   messages = this.messageService.getMessages();
+
+  // Turn timestamp to localtime string
+  displayTimestamp(date: Date | undefined): string {
+    if(!date) return ''; 
+    const dateString = date.toString();
+    const dateOutput = dateString.slice(0, 10);
+    const timeOutput = dateString.slice(11, 16);
+
+    return `${dateOutput}, ${timeOutput}`;
+  }
 
   // Change status on message (PUT)
   changeStatus(message: Message): void {

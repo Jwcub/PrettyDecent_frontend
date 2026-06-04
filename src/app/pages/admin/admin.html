@@ -15,7 +15,7 @@
                 @if (editingId === reservation._id) {
                     <form class="edit-reservation">
                         <label> Datum:
-                            <input type="datetime-local" [value]="toDatetimeLocal(reservation.date)" (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
+                            <input type="datetime-local" [value]="reservation.date ? reservation.date.slice(0, 16) : ''"  (input)="reservation.date = $any($event.target).value" name="date"  name="date" class="edit-field">
                         </label>
 
                         <label> Gäster:
@@ -47,7 +47,7 @@
                 } @else {
                 <div class="res-block res-date">
                     <span class="res-label">Datum</span>
-                    <span>{{ displayDate(reservation.date) }}</span>
+                    <span>{{ displayDateTime(reservation.date) }}</span>
                 </div>
                 <div class="res-block res-guests">
                     <span class="res-label">Gäster</span>
@@ -107,7 +107,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="message-timestamp"> <span class="message-label">Togs emot:</span> {{displayDate(message.created) || null }}</div>
+                <div class="message-timestamp"> <span class="message-label">Togs emot:</span> {{ displayTimestamp(message.created) }}</div>
                 <div class="message-sender"> <span class="message-label">Från:</span> {{ message.name }}, {{ message.email }}</div>
                 <div class="message-message"><span class="message-label">Meddelande:</span> <br> {{ message.message }}</div>
                 
