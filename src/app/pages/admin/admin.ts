@@ -127,16 +127,16 @@ export class Admin {
   changeStatus(message: Message): void {
     if (!message._id) {
       console.error("Could not update message status.");
-      this.errorMessage.set("Could not update message status.");
+      this.errorMessage.set("Kunde inte uppdatera meddelande.");
       return; 
     }
 
     this.messageService.updateMessageStatus(message._id, message).subscribe({
       next: (res: any) => {
-        this.errorMessage.set("Message status has been changed");
+        this.errorMessage.set("Status för meddelande har ändras");
       },
       error: (err: any) => {
-        this.errorMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Kunde ändra meddelandet ${err.message}`);
       }
     });
   }
@@ -169,7 +169,7 @@ export class Admin {
     this.menuService.addMenuItem(this.newMenuItem).subscribe({
       next: (res: MenuItemResponse) => {
         this.menuItems.update(currentMenuItems => [...currentMenuItems, res]);
-        this.errorMessage.set("New menu item submited to menu");
+        this.errorMessage.set("Ny maträtt/dryck tillaggd i menyn");
         this.newMenuItem.name = "";
         this.newMenuItem.description = "";
         this.newMenuItem.type = null;
@@ -177,7 +177,7 @@ export class Admin {
         this.newMenuItem.price = 0;
       },
       error: (err) => {
-        this.errorMessage.set(err.error?.message ?? `Unknown error occured`)
+        this.errorMessage.set(err.error?.message ?? `Okänt fel inträffade`)
       }
     });
   };
@@ -194,11 +194,11 @@ export class Admin {
   saveEdit(menuItem: MenuItemResponse): void {
     this.menuService.editMenuItem(menuItem._id, menuItem).subscribe({
       next: (res: any) => {
-        this.errorMessage.set("Menu item has been updated");
+        this.errorMessage.set("Menyn uppdaterad");
         this.editingId = null;
       },
       error: (err: any) => {
-        this.errorMessage.set(err.error?.message ?? `Could not update menu item ${err.message}`);
+        this.errorMessage.set(err.error?.message ?? `Kunde inte uppdatera menyn ${err.message}`);
       }
     });
   }
@@ -208,11 +208,11 @@ export class Admin {
     this.menuService.removeMenuItem(item._id).subscribe({
       next: (res: any) => {
         this.menuItems.update(items => items.filter(i => i._id !== item._id));
-        this.errorMessage.set("Menu item has been removed");
+        this.errorMessage.set("Mat/dryck har raderats");
 
       },
       error: (err: any) => {
-        this.errorMessage.set(err.error?.message ?? `Something went wrong, menu item wasn't removed`);
+        this.errorMessage.set(err.error?.message ?? `Något gick fel, menyartikel kunde inte raderas`);
       }
     });
   }
