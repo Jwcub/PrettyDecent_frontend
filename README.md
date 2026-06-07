@@ -1,6 +1,16 @@
 # PrettyDecentFrontend
+Detta är frontend-delen av fullstackapplikationen för PrettyDecent. Denna del är skapad med plattformen Angular och använder flera av dess inbyggda funktioner. Ett urval av funktioner i applikationen:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+* Inläsning av meny via API
+* Möjlighet att göra bordsbokningar och skicka meddelande, som lagras i databas.
+* Lösenordsskyddad administratörsvy
+* Skyddade routes som enbart kan nås med JWT-token, såsom att ändra i meny samt läsa in bordsbokningar och meddelanden.
+* Databinding och möjlighet att uppdatera inladdat innehåll i administratörsvyn.
+* Automatisk borttagning av passerade bordsbokningar.
+* Med mera. 
+
+Applikationen tillgänglig vid: https://prettydecent.onrender.com/menu
+
 
 ## Development server
 
